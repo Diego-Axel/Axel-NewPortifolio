@@ -1,0 +1,70 @@
+import { Card } from "@/components/ui/card";
+import { Briefcase } from "lucide-react";
+
+const experiences = [
+  {
+    company: "Tech Solutions Inc.",
+    period: "2022 - Presente",
+    role: "Desenvolvedor Fullstack Sênior",
+    description: "Liderança técnica no desenvolvimento de aplicações web e mobile, utilizando React, React Native e Node.js. Implementação de arquiteturas escaláveis e código limpo."
+  },
+  {
+    company: "Digital Innovations",
+    period: "2020 - 2022",
+    role: "Desenvolvedor Frontend",
+    description: "Desenvolvimento de interfaces modernas e responsivas com React e TypeScript. Colaboração com equipes de design para criar experiências de usuário excepcionais."
+  },
+  {
+    company: "StartUp Labs",
+    period: "2018 - 2020",
+    role: "Desenvolvedor Júnior",
+    description: "Início da carreira desenvolvendo aplicações web com JavaScript e frameworks modernos. Aprendizado contínuo e contribuição em projetos inovadores."
+  }
+];
+
+const Experience = () => {
+  return (
+    <section className="py-24 px-6 bg-secondary/30">
+      <div className="container mx-auto">
+        <div className="text-center mb-16 animate-slide-up">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            Experiência <span className="gradient-text">Profissional</span>
+          </h2>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            Trajetória profissional e principais conquistas
+          </p>
+        </div>
+
+        <div className="max-w-4xl mx-auto space-y-6">
+          {experiences.map((exp, index) => (
+            <Card 
+              key={index}
+              className="p-8 hover-glow transition-all hover:scale-[1.02] border-border/50 bg-card/50 backdrop-blur animate-slide-up"
+              style={{ animationDelay: `${index * 100}ms` }}
+            >
+              <div className="flex gap-6">
+                <div className="flex-shrink-0">
+                  <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
+                    <Briefcase className="w-6 h-6 text-primary" />
+                  </div>
+                </div>
+                
+                <div className="flex-1">
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
+                    <h3 className="text-2xl font-bold">{exp.role}</h3>
+                    <span className="text-primary font-medium">{exp.period}</span>
+                  </div>
+                  
+                  <p className="text-muted-foreground font-medium mb-3">{exp.company}</p>
+                  <p className="text-foreground/80 leading-relaxed">{exp.description}</p>
+                </div>
+              </div>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Experience;
