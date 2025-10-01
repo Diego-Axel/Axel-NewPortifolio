@@ -5,10 +5,10 @@ import { useEffect, useRef, useState } from "react";
 
 const projects = [
   {
-    title: "E-commerce Platform",
-    description: "Plataforma completa de e-commerce com painel administrativo, sistema de pagamentos e gestão de estoque.",
+    title: "Landing Page Para Uma Barbearia",
+    description: "Landing page responsiva para uma barbearia, com agendamento online e galeria de fotos.",
     image: "https://images.unsplash.com/photo-1557821552-17105176677c?w=800&h=600&fit=crop",
-    tech: ["React", "Node.js", "PostgreSQL"],
+    tech: ["React", "TypeScript", "Tailwind CSS", "Node.js"],
     github: "#",
     demo: "#"
   },

@@ -3,10 +3,10 @@ import { Briefcase } from "lucide-react";
 
 const experiences = [
   {
-    company: "Tech Solutions Inc.",
-    period: "2022 - Presente",
-    role: "Desenvolvedor Fullstack Sênior",
-    description: "Liderança técnica no desenvolvimento de aplicações web e mobile, utilizando React, React Native e Node.js. Implementação de arquiteturas escaláveis e código limpo."
+    company: "Viggo Sistemas.",
+    period: "2024 - Até o momento",
+    role: "Estagiário",
+    description: "Análise e organização de dados para elaboração de relatórios dinâmicos, apoiando a tomada de decisão estratégica. Desenvolvimento de dashboards interativos utilizando Power BI para visualização de métricas chave. Coleta, análise e tratamento de informações relevantes para as áreas de negócio. Suporte a chatbots integrados com redes sociais, assistência na conciliação de transações financeiras, participação ativa em reuniões com clientes para levantamento de requisitos."
   },
   {
     company: "Digital Innovations",
@@ -15,9 +15,9 @@ const experiences = [
     description: "Desenvolvimento de interfaces modernas e responsivas com React e TypeScript. Colaboração com equipes de design para criar experiências de usuário excepcionais."
   },
   {
-    company: "StartUp Labs",
-    period: "2018 - 2020",
-    role: "Desenvolvedor Júnior",
+    company: "UFRN",
+    period: "2024 - Até o momento",
+    role: "Bacharelado em Sistemas de Informação",
     description: "Início da carreira desenvolvendo aplicações web com JavaScript e frameworks modernos. Aprendizado contínuo e contribuição em projetos inovadores."
   }
 ];

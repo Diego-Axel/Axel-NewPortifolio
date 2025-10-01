@@ -17,7 +17,7 @@ const Hero = () => {
             <div className="space-y-2">
               <p className="text-primary text-lg font-medium">Olá, eu sou</p>
               <h1 className="text-5xl md:text-7xl font-bold gradient-text">
-                João Silva
+                Diêgo Axel
               </h1>
               <h2 className="text-2xl md:text-3xl text-muted-foreground font-light">
                 Desenvolvedor de Software Fullstack
@@ -25,8 +25,8 @@ const Hero = () => {
             </div>
             
             <p className="text-lg text-foreground/80 max-w-2xl leading-relaxed">
-              Apaixonado por criar soluções digitais inovadoras e eficientes. 
-              Especializado em desenvolvimento web e mobile, transformando ideias 
+              Apaixonado por criar soluções digitais inovadoras e eficientes.
+              Me aprofundando em desenvolvimento web e mobile, transformando ideias
               em aplicações modernas e escaláveis.
             </p>
             
