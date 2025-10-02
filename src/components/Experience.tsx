@@ -9,16 +9,22 @@ const experiences = [
     description: "Análise e organização de dados para elaboração de relatórios dinâmicos, apoiando a tomada de decisão estratégica. Desenvolvimento de dashboards interativos utilizando Power BI para visualização de métricas chave. Coleta, análise e tratamento de informações relevantes para as áreas de negócio. Suporte a chatbots integrados com redes sociais, assistência na conciliação de transações financeiras, participação ativa em reuniões com clientes para levantamento de requisitos."
   },
   {
-    company: "Digital Innovations",
-    period: "2020 - 2022",
-    role: "Desenvolvedor Frontend",
-    description: "Desenvolvimento de interfaces modernas e responsivas com React e TypeScript. Colaboração com equipes de design para criar experiências de usuário excepcionais."
+    company: "Freelancer",
+    period: "2024 - Até o momento",
+    role: "Desenvolvedor Full Stack",
+    description: "Desenvolvimento de aplicações web utilizando JavaScript, TypeScript e frameworks modernos como React e Node.js."
+  },
+  {
+    company: "BarioTech",
+    period: "2024 - Ago 2025",
+    role: "Desenvolvedor Back-end",
+    description: "Desenvolvimento de APIs RESTful e integração com bancos de dados. Implementação de lógica de negócios e otimização de desempenho em aplicações web."
   },
   {
     company: "UFRN",
     period: "2024 - Até o momento",
     role: "Bacharelado em Sistemas de Informação",
-    description: "Início da carreira desenvolvendo aplicações web com JavaScript e frameworks modernos. Aprendizado contínuo e contribuição em projetos inovadores."
+    description: "Início da faculdade de Sistemas de Informação."
   }
 ];
 

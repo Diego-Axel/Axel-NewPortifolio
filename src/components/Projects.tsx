@@ -33,13 +33,13 @@ const projects = [
 		demo: "#",
 	},
 	{
-		title: "Portfolio CMS",
+		title: "Página Web para o incentivo à sáude",
 		description:
-			"Sistema de gerenciamento de conteúdo para portfólios com editor visual e templates customizáveis.",
-		image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
-		tech: ["Next.js", "Prisma", "PostgreSQL"],
+			"Uma página Web destinada a dicas de treino, corrida e alimentação em prol de uma vida mais saudável e ativa.",
+		image: "/images/fitnesWeb.png",
+		tech: ["HTML5", "CSS3", "JavaScript"],
 		github: "https://github.com/Diego-Axel",
-		demo: "#",
+		demo: "https://diego-axel.github.io/FitnesWeb/",
 	},
 ];
 

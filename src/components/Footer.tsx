@@ -4,19 +4,19 @@ const Footer = () => {
   const socialLinks = [
     {
       icon: Github,
-      href: "https://github.com",
+      href: "https://github.com/Diego-Axel",
       label: "GitHub"
     },
     {
       icon: Linkedin,
-      href: "https://linkedin.com",
+      href: "https://www.linkedin.com/in/di%C3%AAgo-axel-1684452b5/",
       label: "LinkedIn"
     },
-    {
-      icon: Mail,
-      href: "mailto:contato@email.com",
-      label: "E-mail"
-    }
+    // {
+    //   icon: Mail,
+    //   href: "mailto:contato@email.com",
+    //   label: "E-mail"
+    // }
   ];
 
   return (
@@ -43,10 +43,10 @@ const Footer = () => {
 
           <div className="text-center space-y-2">
             <p className="text-muted-foreground">
-              © {new Date().getFullYear()} João Silva. Todos os direitos reservados.
+              © {new Date().getFullYear()} Diêgo Axel. Todos os direitos reservados.
             </p>
             <p className="text-sm text-muted-foreground/70">
-              Desenvolvido com React, TypeScript e paixão por código limpo.
+              Desenvolvido com React, TypeScript, 5 xícaras de café e  muita paixão por código.
             </p>
           </div>
         </div>
