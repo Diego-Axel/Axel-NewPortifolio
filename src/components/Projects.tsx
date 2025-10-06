@@ -46,20 +46,20 @@ const projects = [
 const Projects = () => {
 	const scrollRef = useRef<HTMLDivElement>(null);
 	const [isPaused, setIsPaused] = useState(false);
+	const scrollPosRef = useRef(0); // Adicionado para manter o scrollPos entre pausas
 
 	useEffect(() => {
 		const scrollContainer = scrollRef.current;
 		if (!scrollContainer || isPaused) return;
 
-		let scrollPos = 0;
 		const scrollSpeed = 1;
 
 		const scroll = () => {
-			scrollPos += scrollSpeed;
-			if (scrollPos >= scrollContainer.scrollWidth / 2) {
-				scrollPos = 0;
+			scrollPosRef.current += scrollSpeed;
+			if (scrollPosRef.current >= scrollContainer.scrollWidth / 2) {
+				scrollPosRef.current = 0;
 			}
-			scrollContainer.scrollLeft = scrollPos;
+			scrollContainer.scrollLeft = scrollPosRef.current;
 		};
 
 		const interval = setInterval(scroll, 30);
@@ -85,6 +85,8 @@ const Projects = () => {
 					className="flex gap-6 overflow-x-hidden pb-4"
 					onMouseEnter={() => setIsPaused(true)}
 					onMouseLeave={() => setIsPaused(false)}
+					onTouchStart={() => setIsPaused(true)}
+					onTouchEnd={() => setIsPaused(false)}
 				>
 					{[...projects, ...projects].map((project, index) => (
 						<Card
