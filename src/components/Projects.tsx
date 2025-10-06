@@ -2,7 +2,6 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Github } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import BarbeariaImg from "../images/barbearia.jpg";
 
 const projects = [
 	{
@@ -46,7 +45,12 @@ const projects = [
 const Projects = () => {
 	const scrollRef = useRef<HTMLDivElement>(null);
 	const [isPaused, setIsPaused] = useState(false);
-	const scrollPosRef = useRef(0); // Adicionado para manter o scrollPos entre pausas
+	const scrollPosRef = useRef(0);
+
+	// Drag state
+	const isDragging = useRef(false);
+	const startX = useRef(0);
+	const scrollLeft = useRef(0);
 
 	useEffect(() => {
 		const scrollContainer = scrollRef.current;
@@ -67,6 +71,55 @@ const Projects = () => {
 		return () => clearInterval(interval);
 	}, [isPaused]);
 
+	// Mouse events para drag horizontal
+	const handleMouseDown = (e: React.MouseEvent) => {
+		const container = scrollRef.current;
+		if (!container) return;
+		isDragging.current = true;
+		setIsPaused(true);
+		startX.current = e.pageX - container.offsetLeft;
+		scrollLeft.current = container.scrollLeft;
+	};
+
+	const handleMouseMove = (e: React.MouseEvent) => {
+		const container = scrollRef.current;
+		if (!container || !isDragging.current) return;
+		e.preventDefault();
+		const x = e.pageX - container.offsetLeft;
+		const walk = (x - startX.current);
+		container.scrollLeft = scrollLeft.current - walk;
+		scrollPosRef.current = container.scrollLeft;
+	};
+
+	const handleMouseUp = () => {
+		isDragging.current = false;
+		setIsPaused(false);
+	};
+
+	// Touch events para drag horizontal mobile
+	const handleTouchStart = (e: React.TouchEvent) => {
+		const container = scrollRef.current;
+		if (!container) return;
+		isDragging.current = true;
+		setIsPaused(true);
+		startX.current = e.touches[0].pageX - container.offsetLeft;
+		scrollLeft.current = container.scrollLeft;
+	};
+
+	const handleTouchMove = (e: React.TouchEvent) => {
+		const container = scrollRef.current;
+		if (!container || !isDragging.current) return;
+		const x = e.touches[0].pageX - container.offsetLeft;
+		const walk = (x - startX.current);
+		container.scrollLeft = scrollLeft.current - walk;
+		scrollPosRef.current = container.scrollLeft;
+	};
+
+	const handleTouchEnd = () => {
+		isDragging.current = false;
+		setIsPaused(false);
+	};
+
 	return (
 		<section className="py-24 px-6 overflow-hidden">
 			<div className="container mx-auto">
@@ -82,11 +135,15 @@ const Projects = () => {
 
 				<div
 					ref={scrollRef}
-					className="flex gap-6 overflow-x-hidden pb-4"
+					className="flex gap-6 overflow-x-hidden pb-4 cursor-grab"
 					onMouseEnter={() => setIsPaused(true)}
-					onMouseLeave={() => setIsPaused(false)}
-					onTouchStart={() => setIsPaused(true)}
-					onTouchEnd={() => setIsPaused(false)}
+					onMouseLeave={() => { setIsPaused(false); handleMouseUp(); }}
+					onMouseDown={handleMouseDown}
+					onMouseMove={handleMouseMove}
+					onMouseUp={handleMouseUp}
+					onTouchStart={handleTouchStart}
+					onTouchMove={handleTouchMove}
+					onTouchEnd={handleTouchEnd}
 				>
 					{[...projects, ...projects].map((project, index) => (
 						<Card
