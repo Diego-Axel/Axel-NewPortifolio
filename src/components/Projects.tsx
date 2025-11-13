@@ -40,6 +40,15 @@ const projects = [
 		github: "https://github.com/Diego-Axel",
 		demo: "https://diego-axel.github.io/FitnesWeb/",
 	},
+	{
+		title: "Landind Page para um aplicativo de AutoSaúde",
+		description:
+			"Uma Landing Page para um aplicativo focado em AutoSaúde, oferecendo recursos e informações para promover o bem-estar e a saúde pessoal, tudo isso com uma IA para te ajudar",
+		image: "/images/netfitai.png",
+		tech: ["React", "Vite", "TypeScript", "Tailwind CSS", "Shadcn UI"],
+		github: "https://github.com/Diego-Axel",
+		demo: "https://netfit-ia.vercel.app/",
+	},
 ];
 
 const Projects = () => {
