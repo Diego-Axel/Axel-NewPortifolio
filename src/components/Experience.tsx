@@ -4,7 +4,7 @@ import { Briefcase } from "lucide-react";
 const experiences = [
   {
     company: "Viggo Sistemas.",
-    period: "2024 - Até o momento",
+    period: "Abril 2024 -  Até Novembro 2025",
     role: "Estagiário",
     description: "Análise e organização de dados para elaboração de relatórios dinâmicos, apoiando a tomada de decisão estratégica. Desenvolvimento de dashboards interativos utilizando Power BI para visualização de métricas chave. Coleta, análise e tratamento de informações relevantes para as áreas de negócio. Suporte a chatbots integrados com redes sociais, assistência na conciliação de transações financeiras, participação ativa em reuniões com clientes para levantamento de requisitos."
   },
