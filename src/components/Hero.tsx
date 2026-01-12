@@ -7,6 +7,10 @@ const Hero = () => {
     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const scrollToProjects = () => {
+    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden px-4 sm:px-6">
       <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-secondary opacity-50" />
@@ -42,6 +46,7 @@ const Hero = () => {
                 size="lg" 
                 variant="outline"
                 className="hover-glow w-full sm:w-auto"
+                onClick={scrollToProjects}
               >
                 Ver Projetos
               </Button>

@@ -130,7 +130,7 @@ const Projects = () => {
 	};
 
 	return (
-		<section className="py-12 sm:py-16 md:py-24 px-0 sm:px-6 overflow-hidden">
+		<section id="projects" className="py-12 sm:py-16 md:py-24 px-0 sm:px-6 overflow-hidden">
 			<div className="container mx-auto">
 				<div className="text-center mb-10 sm:mb-12 md:mb-16 animate-slide-up px-4">
 					<h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4">
