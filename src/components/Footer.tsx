@@ -20,10 +20,10 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="py-12 px-6 border-t border-border/50">
+    <footer className="py-8 sm:py-10 md:py-12 px-4 sm:px-6 border-t border-border/50">
       <div className="container mx-auto">
-        <div className="flex flex-col items-center gap-6">
-          <div className="flex gap-6">
+        <div className="flex flex-col items-center gap-4 sm:gap-6">
+          <div className="flex gap-4 sm:gap-6">
             {socialLinks.map((link) => {
               const Icon = link.icon;
               return (
@@ -32,20 +32,20 @@ const Footer = () => {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center hover-glow transition-all hover:scale-110 hover:bg-primary group"
+                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-secondary flex items-center justify-center hover-glow transition-all hover:scale-110 hover:bg-primary group"
                   aria-label={link.label}
                 >
-                  <Icon className="w-5 h-5 text-foreground group-hover:text-primary-foreground transition-colors" />
+                  <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-foreground group-hover:text-primary-foreground transition-colors" />
                 </a>
               );
             })}
           </div>
 
-          <div className="text-center space-y-2">
-            <p className="text-muted-foreground">
+          <div className="text-center space-y-1 sm:space-y-2">
+            <p className="text-muted-foreground text-xs sm:text-sm md:text-base">
               © {new Date().getFullYear()} Diêgo Axel. Todos os direitos reservados.
             </p>
-            <p className="text-sm text-muted-foreground/70">
+            <p className="text-[10px] sm:text-xs md:text-sm text-muted-foreground/70">
               Desenvolvido com React, TypeScript, 5 xícaras de café e  muita paixão por código.
             </p>
           </div>

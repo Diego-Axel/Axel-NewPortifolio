@@ -45,21 +45,21 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-24 px-6 bg-secondary/30">
+    <section id="contact" className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 bg-secondary/30">
       <div className="container mx-auto max-w-2xl">
-        <div className="text-center mb-16 animate-slide-up">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+        <div className="text-center mb-10 sm:mb-12 md:mb-16 animate-slide-up">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4">
             Entre em <span className="gradient-text">Contato</span>
           </h2>
-          <p className="text-muted-foreground text-lg">
+          <p className="text-muted-foreground text-sm sm:text-base md:text-lg">
             Tem um projeto em mente? Vamos conversar!
           </p>
         </div>
 
-        <Card className="p-8 hover-glow border-border/50 bg-card/50 backdrop-blur animate-slide-up">
-          <form onSubmit={handleSubmit} className="space-y-6">
+        <Card className="p-4 sm:p-6 md:p-8 hover-glow border-border/50 bg-card/50 backdrop-blur animate-slide-up">
+          <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium mb-2">
+              <label htmlFor="name" className="block text-xs sm:text-sm font-medium mb-1.5 sm:mb-2">
                 Nome
               </label>
               <Input
@@ -69,12 +69,12 @@ const Contact = () => {
                 placeholder="Seu nome completo"
                 value={formData.name}
                 onChange={handleChange}
-                className="bg-background/50"
+                className="bg-background/50 text-sm sm:text-base"
               />
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium mb-2">
+              <label htmlFor="email" className="block text-xs sm:text-sm font-medium mb-1.5 sm:mb-2">
                 E-mail
               </label>
               <Input
@@ -84,12 +84,12 @@ const Contact = () => {
                 placeholder="seu@email.com"
                 value={formData.email}
                 onChange={handleChange}
-                className="bg-background/50"
+                className="bg-background/50 text-sm sm:text-base"
               />
             </div>
 
             <div>
-              <label htmlFor="message" className="block text-sm font-medium mb-2">
+              <label htmlFor="message" className="block text-xs sm:text-sm font-medium mb-1.5 sm:mb-2">
                 Mensagem
               </label>
               <Textarea
@@ -99,16 +99,16 @@ const Contact = () => {
                 rows={6}
                 value={formData.message}
                 onChange={handleChange}
-                className="bg-background/50 resize-none"
+                className="bg-background/50 resize-none text-sm sm:text-base"
               />
             </div>
 
             <Button 
               type="submit" 
               size="lg" 
-              className="w-full hover-glow"
+              className="w-full hover-glow text-sm sm:text-base"
             >
-              <Send className="w-4 h-4 mr-2" />
+              <Send className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
               Enviar Mensagem
             </Button>
           </form>

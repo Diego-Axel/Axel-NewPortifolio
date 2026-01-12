@@ -130,21 +130,21 @@ const Projects = () => {
 	};
 
 	return (
-		<section className="py-24 px-6 overflow-hidden">
+		<section className="py-12 sm:py-16 md:py-24 px-0 sm:px-6 overflow-hidden">
 			<div className="container mx-auto">
-				<div className="text-center mb-16 animate-slide-up">
-					<h2 className="text-4xl md:text-5xl font-bold mb-4">
+				<div className="text-center mb-10 sm:mb-12 md:mb-16 animate-slide-up px-4">
+					<h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4">
 						Projetos em{" "}
 						<span className="gradient-text">Destaque</span>
 					</h2>
-					<p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+					<p className="text-muted-foreground text-sm sm:text-base md:text-lg max-w-2xl mx-auto">
 						Alguns dos meus trabalhos mais recentes e impactantes
 					</p>
 				</div>
 
 				<div
 					ref={scrollRef}
-					className="flex gap-6 overflow-x-hidden pb-4 cursor-grab"
+					className="flex gap-4 sm:gap-6 overflow-x-hidden pb-4 cursor-grab pl-4 sm:pl-0"
 					onMouseEnter={() => setIsPaused(true)}
 					onMouseLeave={() => { setIsPaused(false); handleMouseUp(); }}
 					onMouseDown={handleMouseDown}
@@ -157,9 +157,9 @@ const Projects = () => {
 					{[...projects, ...projects].map((project, index) => (
 						<Card
 							key={index}
-							className="flex-shrink-0 w-[400px] overflow-hidden hover-glow transition-all hover:scale-105 border-border/50 bg-card/50 backdrop-blur"
+							className="flex-shrink-0 w-[280px] sm:w-[340px] md:w-[400px] overflow-hidden hover-glow transition-all hover:scale-105 border-border/50 bg-card/50 backdrop-blur"
 						>
-							<div className="relative h-48 overflow-hidden">
+							<div className="relative h-40 sm:h-44 md:h-48 overflow-hidden">
 								<img
 									src={project.image}
 									alt={project.title}
@@ -168,28 +168,28 @@ const Projects = () => {
 								<div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
 							</div>
 
-							<div className="p-6 space-y-4">
-								<h3 className="text-2xl font-bold">{project.title}</h3>
-								<p className="text-muted-foreground">
+							<div className="p-4 sm:p-5 md:p-6 space-y-3 sm:space-y-4">
+								<h3 className="text-lg sm:text-xl md:text-2xl font-bold line-clamp-2">{project.title}</h3>
+								<p className="text-muted-foreground text-xs sm:text-sm line-clamp-3">
 									{project.description}
 								</p>
 
-								<div className="flex flex-wrap gap-2">
+								<div className="flex flex-wrap gap-1.5 sm:gap-2">
 									{project.tech.map((tech) => (
 										<span
 											key={tech}
-											className="px-3 py-1 text-xs font-medium rounded-full bg-primary/20 text-primary"
+											className="px-2 sm:px-3 py-0.5 sm:py-1 text-[10px] sm:text-xs font-medium rounded-full bg-primary/20 text-primary"
 										>
 											{tech}
 										</span>
 									))}
 								</div>
 
-								<div className="flex gap-3 pt-2">
+								<div className="flex gap-2 sm:gap-3 pt-2">
 									<Button
 										size="sm"
 										variant="outline"
-										className="flex-1"
+										className="flex-1 text-xs sm:text-sm"
 										asChild
 									>
 										<a
@@ -197,13 +197,13 @@ const Projects = () => {
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											<Github className="w-4 h-4 mr-2" />
+											<Github className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
 											Código
 										</a>
 									</Button>
 									<Button
 										size="sm"
-										className="flex-1"
+										className="flex-1 text-xs sm:text-sm"
 										asChild
 									>
 										<a
@@ -211,7 +211,7 @@ const Projects = () => {
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											<ExternalLink className="w-4 h-4 mr-2" />
+											<ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
 											Demo
 										</a>
 									</Button>
