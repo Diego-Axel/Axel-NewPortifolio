@@ -56,8 +56,9 @@ const skills = [
 
 const Skills = () => {
 	return (
-		<section className="py-12 sm:py-16 md:py-24 px-4 sm:px-6">
-			<div className="container mx-auto">
+		    <section className="relative py-12 sm:py-16 md:py-24 px-4 sm:px-6">
+			    <div className="absolute inset-0 opacity-30 gradient-walk" style={{ background: "var(--gradient-hero)" }} />
+			    <div className="container mx-auto relative z-10">
 				<div className="text-center mb-10 sm:mb-12 md:mb-16 animate-slide-up">
 					<h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4">
 						Habilidades{" "}
