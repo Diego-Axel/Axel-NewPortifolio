@@ -6,9 +6,23 @@
 All colors MUST be HSL.
 */
 
+/* Typed custom properties so hue animations interpolate smoothly */
+@property --primary-hue {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 205;
+}
+@property --accent-hue {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 350;
+}
+
 @layer base {
   :root {
     /* Palette inspired by photo lighting: deep navy + cyan/blue and red/magenta */
+    --primary-hue: 205;
+    --accent-hue: 350;
     --background: 220 35% 7%;
     --foreground: 0 0% 100%;
 
@@ -19,7 +33,7 @@ All colors MUST be HSL.
     --popover-foreground: 0 0% 100%;
 
     /* Primary = cyan/blue glow, Accent = red/magenta glow */
-    --primary: 205 90% 60%;
+    --primary: var(--primary-hue) 90% 60%;
     --primary-foreground: 220 35% 7%;
 
     --secondary: 220 25% 16%;
@@ -28,7 +42,7 @@ All colors MUST be HSL.
     --muted: 220 20% 28%;
     --muted-foreground: 220 10% 68%;
 
-    --accent: 350 85% 60%;
+    --accent: var(--accent-hue) 85% 60%;
     --accent-foreground: 220 35% 7%;
 
     --destructive: 0 74% 48%;
@@ -36,7 +50,7 @@ All colors MUST be HSL.
 
     --border: 220 25% 18%;
     --input: 220 25% 18%;
-    --ring: 205 90% 60%;
+    --ring: var(--primary-hue) 90% 60%;
 
     --radius: 0.75rem;
 
@@ -50,8 +64,8 @@ All colors MUST be HSL.
     --sidebar-ring: 205 90% 60%;
 
     /* Custom gradient for hero section */
-    --gradient-hero: radial-gradient(1200px circle at 20% 20%, hsl(205 90% 18% / 0.55) 0%, transparent 45%),
-             radial-gradient(1200px circle at 80% 30%, hsl(350 85% 20% / 0.45) 0%, transparent 50%),
+    --gradient-hero: radial-gradient(1200px circle at 20% 20%, hsl(var(--primary-hue) 90% 18% / 0.55) 0%, transparent 45%),
+         radial-gradient(1200px circle at 80% 30%, hsl(var(--accent-hue) 85% 20% / 0.45) 0%, transparent 50%),
              linear-gradient(135deg, hsl(220 35% 7%) 0%, hsl(220 30% 10%) 100%);
     
     /* Shadows */
@@ -63,6 +77,8 @@ All colors MUST be HSL.
   }
 
   .dark {
+    --primary-hue: 205;
+    --accent-hue: 350;
     --background: 220 35% 7%;
     --foreground: 0 0% 100%;
 
@@ -72,7 +88,7 @@ All colors MUST be HSL.
     --popover: 220 35% 12%;
     --popover-foreground: 0 0% 100%;
 
-    --primary: 205 90% 60%;
+    --primary: var(--primary-hue) 90% 60%;
     --primary-foreground: 220 35% 7%;
 
     --secondary: 220 25% 16%;
@@ -81,7 +97,7 @@ All colors MUST be HSL.
     --muted: 220 20% 28%;
     --muted-foreground: 220 10% 68%;
 
-    --accent: 350 85% 60%;
+    --accent: var(--accent-hue) 85% 60%;
     --accent-foreground: 220 35% 7%;
 
     --destructive: 0 62.8% 30.6%;
@@ -89,7 +105,7 @@ All colors MUST be HSL.
 
     --border: 220 25% 18%;
     --input: 220 25% 18%;
-    --ring: 205 90% 60%;
+    --ring: var(--primary-hue) 90% 60%;
     
     --sidebar-background: 220 32% 10%;
     --sidebar-foreground: 0 0% 100%;
@@ -135,6 +151,23 @@ All colors MUST be HSL.
     box-shadow: var(--shadow-glow);
   }
 
+  /* RGB-style hue cycling across primary/accent */
+  @keyframes primary-hue-cycle {
+    0%   { --primary-hue: 0; }
+    33%  { --primary-hue: 120; }
+    66%  { --primary-hue: 240; }
+    100% { --primary-hue: 360; }
+  }
+  @keyframes accent-hue-cycle {
+    0%   { --accent-hue: 240; }
+    33%  { --accent-hue: 360; }
+    66%  { --accent-hue: 60; }
+    100% { --accent-hue: 240; }
+  }
+  .rgb-animate {
+    animation: primary-hue-cycle 18s linear infinite, accent-hue-cycle 18s linear infinite -9s;
+  }
+
   /* Respect user preference to reduce motion */
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
@@ -145,6 +178,9 @@ All colors MUST be HSL.
     }
     .hover-glow:hover {
       box-shadow: none;
+    }
+    .rgb-animate {
+      animation: none !important;
     }
   }
 
