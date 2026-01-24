@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { ArrowDown } from "lucide-react";
 import avatarImage from "@/assets/avatar.jpg";
+import { motion } from "framer-motion";
+import { fadeInUp, staggerContainer, float } from "@/lib/motion";
 
 const Hero = () => {
   const scrollToContact = () => {
@@ -16,53 +18,66 @@ const Hero = () => {
       <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-secondary opacity-50" />
       
       <div className="container mx-auto relative z-10 w-full">
-        <div className="flex flex-col md:flex-row items-center gap-8 sm:gap-12 animate-fade-in">
+        <motion.div
+          className="flex flex-col md:flex-row items-center gap-8 sm:gap-12"
+          variants={staggerContainer}
+          initial="hidden"
+          animate="visible"
+        >
           <div className="flex-1 space-y-4 sm:space-y-6 text-center md:text-left w-full">
             <div className="space-y-2">
-              <p className="text-primary text-base sm:text-lg font-medium">Olá, eu sou</p>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold gradient-text leading-tight">
+              <motion.p className="text-primary text-base sm:text-lg font-medium" variants={fadeInUp}>Olá, eu sou</motion.p>
+              <motion.h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold gradient-text leading-tight" variants={fadeInUp}>
                 Diêgo Axel
-              </h1>
-              <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-muted-foreground font-light">
+              </motion.h1>
+              <motion.h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-muted-foreground font-light" variants={fadeInUp}>
                 Desenvolvedor de Software Fullstack
-              </h2>
+              </motion.h2>
             </div>
             
-            <p className="text-sm sm:text-base md:text-lg text-foreground/80 max-w-2xl leading-relaxed mx-auto md:mx-0">
+            <motion.p className="text-sm sm:text-base md:text-lg text-foreground/80 max-w-2xl leading-relaxed mx-auto md:mx-0" variants={fadeInUp}>
               Apaixonado por criar soluções digitais inovadoras e eficientes.
               Estou me aprofundando e me especializando em desenvolvimento web, com foco em levar a solução certa para o seu problema — independente de qual seja.
-            </p>
+            </motion.p>
             
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start w-full sm:w-auto">
-              <Button 
-                size="lg" 
-                className="hover-glow w-full sm:w-auto"
-                onClick={scrollToContact}
-              >
-                Entre em Contato
-              </Button>
-              <Button 
-                size="lg" 
-                variant="outline"
-                className="hover-glow w-full sm:w-auto"
-                onClick={scrollToProjects}
-              >
-                Ver Projetos
-              </Button>
-            </div>
+            <motion.div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start w-full sm:w-auto" variants={fadeInUp}>
+              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
+                <Button 
+                  size="lg" 
+                  className="hover-glow w-full sm:w-auto"
+                  onClick={scrollToContact}
+                >
+                  Entre em Contato
+                </Button>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
+                <Button 
+                  size="lg" 
+                  variant="outline"
+                  className="hover-glow w-full sm:w-auto"
+                  onClick={scrollToProjects}
+                >
+                  Ver Projetos
+                </Button>
+              </motion.div>
+            </motion.div>
           </div>
           
           <div className="flex-shrink-0 mt-6 md:mt-0">
-            <div className="relative">
+            <motion.div className="relative" variants={fadeInUp}>
               <div className="absolute inset-0 bg-primary/20 rounded-full blur-3xl" />
-              <img 
+              <motion.img 
                 src={avatarImage} 
                 alt="Diêgo Axel" 
                 className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-80 lg:h-80 rounded-full object-cover border-4 border-primary/30 hover-glow"
+                variants={float}
+                initial="initial"
+                animate="animate"
+                whileHover={{ scale: 1.02 }}
               />
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </div>
       
       <div className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 animate-bounce">

@@ -1,5 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Code2, Smartphone, Database, Server } from "lucide-react";
+import { motion } from "framer-motion";
+import { cardReveal, staggerContainer } from "@/lib/motion";
 
 const skills = [
 	{
@@ -66,14 +68,18 @@ const Skills = () => {
 					</p>
 				</div>
 
-				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+				<motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"
+				  variants={staggerContainer}
+				  initial="hidden"
+				  whileInView="visible"
+				  viewport={{ once: true, margin: "-100px" }}
+				>
 					{skills.map((skill, index) => {
 						const Icon = skill.icon;
 						return (
+							<motion.div key={skill.name} variants={cardReveal} whileHover={{ y: -4, scale: 1.02 }} whileTap={{ scale: 0.98 }}>
 							<Card
-								key={skill.name}
-								className="p-4 sm:p-6 hover-glow cursor-pointer transition-all hover:scale-105 border-border/50 bg-card/50 backdrop-blur animate-slide-up"
-								style={{ animationDelay: `${index * 100}ms` }}
+								className="p-4 sm:p-6 hover-glow cursor-pointer transition-all border-border/50 bg-card/50 backdrop-blur"
 							>
 								<div className="space-y-3 sm:space-y-4">
 									<div
@@ -92,9 +98,10 @@ const Skills = () => {
 									</div>
 								</div>
 							</Card>
+							</motion.div>
 						);
 					})}
-				</div>
+				</motion.div>
 			</div>
 		</section>
 	);

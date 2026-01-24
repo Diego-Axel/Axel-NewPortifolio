@@ -2,6 +2,8 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Github } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { fadeInUp, staggerContainer, cardReveal } from "@/lib/motion";
 
 const projects = [
 	{
@@ -132,15 +134,15 @@ const Projects = () => {
 	return (
 		<section id="projects" className="py-12 sm:py-16 md:py-24 px-0 sm:px-6 overflow-hidden">
 			<div className="container mx-auto">
-				<div className="text-center mb-10 sm:mb-12 md:mb-16 animate-slide-up px-4">
-					<h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4">
+				<motion.div className="text-center mb-10 sm:mb-12 md:mb-16 px-4" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+					<motion.h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4" variants={fadeInUp}>
 						Projetos em{" "}
 						<span className="gradient-text">Destaque</span>
-					</h2>
-					<p className="text-muted-foreground text-sm sm:text-base md:text-lg max-w-2xl mx-auto">
+					</motion.h2>
+					<motion.p className="text-muted-foreground text-sm sm:text-base md:text-lg max-w-2xl mx-auto" variants={fadeInUp}>
 						Alguns dos meus trabalhos mais recentes e impactantes
-					</p>
-				</div>
+					</motion.p>
+				</motion.div>
 
 				<div
 					ref={scrollRef}
@@ -155,9 +157,9 @@ const Projects = () => {
 					onTouchEnd={handleTouchEnd}
 				>
 					{[...projects, ...projects].map((project, index) => (
+						<motion.div key={index} variants={cardReveal} initial="hidden" animate="visible">
 						<Card
-							key={index}
-							className="flex-shrink-0 w-[280px] sm:w-[340px] md:w-[400px] overflow-hidden hover-glow transition-all hover:scale-105 border-border/50 bg-card/50 backdrop-blur"
+							className="flex-shrink-0 w-[280px] sm:w-[340px] md:w-[400px] overflow-hidden hover-glow transition-all border-border/50 bg-card/50 backdrop-blur"
 						>
 							<div className="relative h-40 sm:h-44 md:h-48 overflow-hidden">
 								<img
@@ -218,6 +220,7 @@ const Projects = () => {
 								</div>
 							</div>
 						</Card>
+						</motion.div>
 					))}
 				</div>
 			</div>

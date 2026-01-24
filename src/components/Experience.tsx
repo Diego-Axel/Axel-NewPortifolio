@@ -1,5 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Briefcase } from "lucide-react";
+import { motion } from "framer-motion";
+import { fadeInUp, staggerContainer, cardReveal } from "@/lib/motion";
 
 const experiences = [
   {
@@ -32,21 +34,20 @@ const Experience = () => {
   return (
     <section className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 bg-secondary/30">
       <div className="container mx-auto">
-        <div className="text-center mb-10 sm:mb-12 md:mb-16 animate-slide-up">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4">
+        <motion.div className="text-center mb-10 sm:mb-12 md:mb-16" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+          <motion.h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4" variants={fadeInUp}>
             Experiência <span className="gradient-text">Profissional</span>
-          </h2>
-          <p className="text-muted-foreground text-sm sm:text-base md:text-lg max-w-2xl mx-auto px-4">
+          </motion.h2>
+          <motion.p className="text-muted-foreground text-sm sm:text-base md:text-lg max-w-2xl mx-auto px-4" variants={fadeInUp}>
             Trajetória profissional e principais conquistas
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         <div className="max-w-4xl mx-auto space-y-4 sm:space-y-6">
           {experiences.map((exp, index) => (
+            <motion.div key={index} variants={cardReveal} initial="hidden" whileInView="visible" viewport={{ once: true }}>
             <Card 
-              key={index}
-              className="p-4 sm:p-6 md:p-8 hover-glow transition-all hover:scale-[1.02] border-border/50 bg-card/50 backdrop-blur animate-slide-up"
-              style={{ animationDelay: `${index * 100}ms` }}
+              className="p-4 sm:p-6 md:p-8 hover-glow transition-all border-border/50 bg-card/50 backdrop-blur"
             >
               <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
                 <div className="flex-shrink-0">
@@ -66,6 +67,7 @@ const Experience = () => {
                 </div>
               </div>
             </Card>
+            </motion.div>
           ))}
         </div>
       </div>
