@@ -30,8 +30,7 @@ const Hero = () => {
             
             <p className="text-sm sm:text-base md:text-lg text-foreground/80 max-w-2xl leading-relaxed mx-auto md:mx-0">
               Apaixonado por criar soluções digitais inovadoras e eficientes.
-              Me aprofundando em desenvolvimento web e mobile, transformando ideias
-              em aplicações modernas e escaláveis.
+              Estou me aprofundando e me especializando em desenvolvimento web, com foco em levar a solução certa para o seu problema — independente de qual seja.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start w-full sm:w-auto">
