@@ -9,10 +9,10 @@ const skills = [
 		color: "from-blue-500 to-cyan-500",
 	},
 	{
-		name: "React Native",
-		icon: Smartphone,
-		description: "Aplicativos mobile multiplataforma",
-		color: "from-purple-500 to-pink-500",
+		name: "Angular",
+		icon: Code2,
+		description: "Framework para aplicações web escaláveis e modulares",
+		color: "from-red-600 to-orange-500",
 	},
 	{
 		name: "TypeScript",
