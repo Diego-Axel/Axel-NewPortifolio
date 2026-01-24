@@ -151,6 +151,24 @@ All colors MUST be HSL.
     box-shadow: var(--shadow-glow);
   }
 
+  /* Animated gradient movement (walking colors) */
+  .gradient-walk {
+    background-size: 180% 180%;
+    animation: gradient-pan 28s ease-in-out infinite;
+  }
+
+  @keyframes gradient-pan {
+    0% {
+      background-position: 0% 50%, 80% 30%, 0% 0%;
+    }
+    50% {
+      background-position: 100% 50%, 20% 70%, 100% 100%;
+    }
+    100% {
+      background-position: 0% 50%, 80% 30%, 0% 0%;
+    }
+  }
+
   /* RGB-style hue cycling across primary/accent */
   @keyframes primary-hue-cycle {
     0%   { --primary-hue: 0; }
@@ -180,6 +198,9 @@ All colors MUST be HSL.
       box-shadow: none;
     }
     .rgb-animate {
+      animation: none !important;
+    }
+    .gradient-walk {
       animation: none !important;
     }
   }
