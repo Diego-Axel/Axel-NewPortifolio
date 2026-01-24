@@ -15,7 +15,7 @@ const Hero = () => {
 
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden px-4 sm:px-6">
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-secondary opacity-50" />
+      <div className="absolute inset-0 opacity-50 gradient-walk" style={{ background: "var(--gradient-hero)" }} />
       
       <div className="container mx-auto relative z-10 w-full">
         <motion.div
