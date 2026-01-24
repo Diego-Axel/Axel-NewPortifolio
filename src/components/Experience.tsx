@@ -32,8 +32,9 @@ const experiences = [
 
 const Experience = () => {
   return (
-    <section className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 bg-secondary/30">
-      <div className="container mx-auto">
+    <section className="relative py-12 sm:py-16 md:py-24 px-4 sm:px-6 bg-secondary/30">
+      <div className="absolute inset-0 opacity-20 gradient-walk" style={{ background: "var(--gradient-hero)" }} />
+      <div className="container mx-auto relative z-10">
         <motion.div className="text-center mb-10 sm:mb-12 md:mb-16" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
           <motion.h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4" variants={fadeInUp}>
             Experiência <span className="gradient-text">Profissional</span>
