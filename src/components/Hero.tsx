@@ -69,6 +69,7 @@ const Hero = () => {
               <motion.img 
                 src={avatarImage} 
                 alt="Diêgo Axel" 
+                fetchPriority="high"
                 className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-80 lg:h-80 rounded-full object-cover border-4 border-primary/30 hover-glow"
                 variants={float}
                 initial="initial"

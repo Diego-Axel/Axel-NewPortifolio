@@ -131,6 +131,19 @@ All colors MUST be HSL.
     box-shadow: var(--shadow-glow);
   }
 
+  /* Respect user preference to reduce motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+    .hover-glow:hover {
+      box-shadow: none;
+    }
+  }
+
   /* Mobile-specific improvements */
   @media (max-width: 640px) {
     html {
