@@ -4,6 +4,7 @@ import { ExternalLink, Github } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { fadeInUp, staggerContainer, cardReveal } from "@/lib/motion";
+import TiltCard from "@/components/ui/TiltCard";
 
 const projects = [
 	{
@@ -29,7 +30,7 @@ const projects = [
 		description:
 			"Aplicativo para criação de listas de compras personalizadas com compartilhamento em tempo real, feita de acordo como o cliente pediu e adequada para a realidade dele.",
 		image: "/images/listaDeSupermercado.png",
-		tech: ["React", "TypeScript", "Tailwind CSS", "PLpgSQL","Node.js"],
+		tech: ["React", "TypeScript", "Tailwind CSS", "PLpgSQL", "Node.js"],
 		github: "https://github.com/Diego-Axel",
 		demo: "#",
 	},
@@ -132,9 +133,9 @@ const Projects = () => {
 	};
 
 	return (
-		    <section id="projects" className="relative py-12 sm:py-16 md:py-24 px-0 sm:px-6 overflow-hidden">
-			    <div className="absolute inset-0 opacity-25 gradient-walk" style={{ background: "var(--gradient-hero)" }} />
-			    <div className="container mx-auto relative z-10">
+		<section id="projects" className="relative py-12 sm:py-16 md:py-24 px-0 sm:px-6 overflow-hidden">
+			<div className="absolute inset-0 opacity-25 gradient-walk" style={{ background: "var(--gradient-hero)" }} />
+			<div className="container mx-auto relative z-10">
 				<motion.div className="text-center mb-10 sm:mb-12 md:mb-16 px-4" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
 					<motion.h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4" variants={fadeInUp}>
 						Projetos em{" "}
@@ -159,70 +160,72 @@ const Projects = () => {
 				>
 					{[...projects, ...projects].map((project, index) => (
 						<motion.div key={index} variants={cardReveal} initial="hidden" animate="visible">
-						<Card
-							className="flex-shrink-0 w-[280px] sm:w-[340px] md:w-[400px] overflow-hidden hover-glow transition-all border-border/50 bg-card/50 backdrop-blur"
-						>
-							<div className="relative h-40 sm:h-44 md:h-48 overflow-hidden">
-								<img
-									src={project.image}
-									alt={project.title}
-									loading="lazy"
-									decoding="async"
-									className="w-full h-full object-cover transition-transform hover:scale-110"
-								/>
-								<div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
-							</div>
+							<TiltCard className="flex-shrink-0 w-[280px] sm:w-[340px] md:w-[400px]">
+								<Card
+									className="h-full w-full overflow-hidden hover-glow transition-all border-border/50 bg-card/50 backdrop-blur"
+								>
+									<div className="relative h-40 sm:h-44 md:h-48 overflow-hidden">
+										<img
+											src={project.image}
+											alt={project.title}
+											loading="lazy"
+											decoding="async"
+											className="w-full h-full object-cover transition-transform hover:scale-110"
+										/>
+										<div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
+									</div>
 
-							<div className="p-4 sm:p-5 md:p-6 space-y-3 sm:space-y-4">
-								<h3 className="text-lg sm:text-xl md:text-2xl font-bold line-clamp-2">{project.title}</h3>
-								<p className="text-muted-foreground text-xs sm:text-sm line-clamp-3">
-									{project.description}
-								</p>
+									<div className="p-4 sm:p-5 md:p-6 space-y-3 sm:space-y-4">
+										<h3 className="text-lg sm:text-xl md:text-2xl font-bold line-clamp-2">{project.title}</h3>
+										<p className="text-muted-foreground text-xs sm:text-sm line-clamp-3">
+											{project.description}
+										</p>
 
-								<div className="flex flex-wrap gap-1.5 sm:gap-2">
-									{project.tech.map((tech) => (
-										<span
-											key={tech}
-											className="px-2 sm:px-3 py-0.5 sm:py-1 text-[10px] sm:text-xs font-medium rounded-full bg-primary/20 text-primary"
-										>
-											{tech}
-										</span>
-									))}
-								</div>
+										<div className="flex flex-wrap gap-1.5 sm:gap-2">
+											{project.tech.map((tech) => (
+												<span
+													key={tech}
+													className="px-2 sm:px-3 py-0.5 sm:py-1 text-[10px] sm:text-xs font-medium rounded-full bg-primary/20 text-primary"
+												>
+													{tech}
+												</span>
+											))}
+										</div>
 
-								<div className="flex gap-2 sm:gap-3 pt-2">
-									<Button
-										size="sm"
-										variant="outline"
-										className="flex-1 text-xs sm:text-sm"
-										asChild
-									>
-										<a
-											href={project.github}
-											target="_blank"
-											rel="noopener noreferrer"
-										>
-											<Github className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
-											Código
-										</a>
-									</Button>
-									<Button
-										size="sm"
-										className="flex-1 text-xs sm:text-sm"
-										asChild
-									>
-										<a
-											href={project.demo}
-											target="_blank"
-											rel="noopener noreferrer"
-										>
-											<ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
-											Demo
-										</a>
-									</Button>
-								</div>
-							</div>
-						</Card>
+										<div className="flex gap-2 sm:gap-3 pt-2">
+											<Button
+												size="sm"
+												variant="outline"
+												className="flex-1 text-xs sm:text-sm"
+												asChild
+											>
+												<a
+													href={project.github}
+													target="_blank"
+													rel="noopener noreferrer"
+												>
+													<Github className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+													Código
+												</a>
+											</Button>
+											<Button
+												size="sm"
+												className="flex-1 text-xs sm:text-sm"
+												asChild
+											>
+												<a
+													href={project.demo}
+													target="_blank"
+													rel="noopener noreferrer"
+												>
+													<ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+													Demo
+												</a>
+											</Button>
+										</div>
+									</div>
+								</Card>
+							</TiltCard>
 						</motion.div>
 					))}
 				</div>
