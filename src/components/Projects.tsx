@@ -44,10 +44,37 @@ const projects = [
 		demo: "https://diego-axel.github.io/FitnesWeb/",
 	},
 	{
-		title: "Landind Page para um aplicativo de AutoSaúde",
+		title: "Landing Page para um aplicativo de AutoSaúde",
 		description:
 			"Uma Landing Page para um aplicativo focado em AutoSaúde, oferecendo recursos e informações para promover o bem-estar e a saúde pessoal, tudo isso com uma IA para te ajudar",
 		image: "/images/netfitai.png",
+		tech: ["React", "Vite", "TypeScript", "Tailwind CSS", "Shadcn UI"],
+		github: "https://github.com/Diego-Axel",
+		demo: "https://netfit-ia.vercel.app/",
+	},
+	{
+		title: "Sistema de Pedidos Online Para Loja de Suplementos",
+		description:
+			"Sistema de pedidos online para uma loja de suplementos, com carrinho de compras, onde os pedidos são enviados diretamente para o WhatsApp da loja.",
+		image: "/images/venus-suplementos.png",
+		tech: ["React", "Vite", "TypeScript", "Tailwind CSS", "Shadcn UI"],
+		github: "https://github.com/Diego-Axel",
+		demo: "https://venus-suplementos.vercel.app/",
+	},
+	{
+		title: "Landing Page para a Nutritiva",
+		description:
+			"Uma Landing Page para a Nutritiva, uma empresa de Engenharia aplicada para transformar bioeconomia em infraestrutura industrial.",
+		image: "/images/nutritiva1.png",
+		tech: ["React", "Vite", "TypeScript", "Tailwind CSS", "Shadcn UI"],
+		github: "https://github.com/Diego-Axel",
+		demo: "https://netfit-ia.vercel.app/",
+	},
+	{
+		title: "+ Uma Landing Page para a Nutritiva",
+		description:
+			"Uma Landing Page para a Nutritiva, uma empresa de Engenharia aplicada para transformar bioeconomia em infraestrutura industrial.",
+		image: "/images/nutritiva2.png",
 		tech: ["React", "Vite", "TypeScript", "Tailwind CSS", "Shadcn UI"],
 		github: "https://github.com/Diego-Axel",
 		demo: "https://netfit-ia.vercel.app/",
