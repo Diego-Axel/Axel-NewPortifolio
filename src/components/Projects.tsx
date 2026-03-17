@@ -68,7 +68,7 @@ const projects = [
 		image: "/images/nutritiva1.png",
 		tech: ["React", "Vite", "TypeScript", "Tailwind CSS", "Shadcn UI"],
 		github: "https://github.com/Diego-Axel",
-		demo: "https://netfit-ia.vercel.app/",
+		demo: "#",
 	},
 	{
 		title: "+ Uma Landing Page para a Nutritiva",
@@ -77,7 +77,7 @@ const projects = [
 		image: "/images/nutritiva2.png",
 		tech: ["React", "Vite", "TypeScript", "Tailwind CSS", "Shadcn UI"],
 		github: "https://github.com/Diego-Axel",
-		demo: "https://netfit-ia.vercel.app/",
+		demo: "https://anutritiva.com.br/",
 	},
 ];
 
