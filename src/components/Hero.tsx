@@ -8,7 +8,7 @@ import { socials } from "@/data/portfolio";
 const headline = ["Construo sistemas", "web que resolvem", "problemas reais."];
 
 const stats = [
-  { value: "UFRN", label: "Sistema em produção" },
+  { value: "UFRN", label: "Sistemas de Informação" },
   { value: "2024", label: "Atuando no mercado" },
   { value: "Full Stack", label: "Do banco à interface" },
 ];
