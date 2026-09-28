@@ -175,8 +175,8 @@ export const experiences: Experience[] = [
     period: "Out 2025 — Dez 2025",
     meta: "Meio período · Híbrido",
     description:
-      "Engenharia de software do aplicativo Manual do Idoso Ativo, voltado à promoção da saúde na terceira idade, incentivando idosos a praticar atividades físicas em casa ou em academias de praça.",
-    tags: ["Engenharia de software", "Aplicativo", "Saúde"],
+      "Desenvolvimento do aplicativo Manual do Idoso Ativo, com front-end em React Native e back-end em Django, voltado à promoção da saúde na terceira idade, incentivando idosos a praticar atividades físicas em casa ou em academias de praça.",
+    tags: ["React Native", "Django", "Python"],
   },
   {
     company: "BarioTech Solutions",
@@ -208,7 +208,7 @@ export const stack = [
   {
     title: "Frontend",
     description: "Interfaces rápidas, acessíveis e responsivas.",
-    items: ["React", "Next.js", "TypeScript", "Angular", "Tailwind CSS", "Vite"],
+    items: ["React", "Next.js", "React Native", "TypeScript", "Angular", "Tailwind CSS"],
   },
   {
     title: "Backend",
