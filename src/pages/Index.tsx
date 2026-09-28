@@ -1,20 +1,24 @@
+import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import Skills from "@/components/Skills";
-import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
+import Experience from "@/components/Experience";
+import Skills from "@/components/Skills";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import Background3D from "@/components/ui/Background3D";
+import SiteBackground from "@/components/ui/SiteBackground";
 
 const Index = () => {
   return (
-    <div className="min-h-screen overflow-x-hidden w-full relative">
-      <Background3D />
-      <Hero />
-      <Skills />
-      <Experience />
-      <Projects />
-      <Contact />
+    <div className="relative min-h-screen w-full overflow-x-hidden">
+      <SiteBackground />
+      <Navbar />
+      <main>
+        <Hero />
+        <Projects />
+        <Experience />
+        <Skills />
+        <Contact />
+      </main>
       <Footer />
     </div>
   );

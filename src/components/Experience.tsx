@@ -1,76 +1,83 @@
-import { Card } from "@/components/ui/card";
-import { Briefcase } from "lucide-react";
-import { motion } from "framer-motion";
-import { fadeInUp, staggerContainer, cardReveal } from "@/lib/motion";
-
-const experiences = [
-  {
-    company: "Viggo Sistemas.",
-    period: "Abril 2024 -  Até Novembro 2025",
-    role: "Estagiário",
-    description: "Análise e organização de dados para elaboração de relatórios dinâmicos, apoiando a tomada de decisão estratégica. Desenvolvimento de dashboards interativos utilizando Power BI para visualização de métricas chave. Coleta, análise e tratamento de informações relevantes para as áreas de negócio. Suporte a chatbots integrados com redes sociais, assistência na conciliação de transações financeiras, participação ativa em reuniões com clientes para levantamento de requisitos."
-  },
-  {
-    company: "Freelancer",
-    period: "2024 - Até o momento",
-    role: "Desenvolvedor Full Stack",
-    description: "Desenvolvimento de aplicações web utilizando JavaScript, TypeScript e frameworks modernos como React e Node.js."
-  },
-  {
-    company: "BarioTech",
-    period: "2024 - Ago 2025",
-    role: "Desenvolvedor Back-end",
-    description: "Desenvolvimento de APIs RESTful e integração com bancos de dados. Implementação de lógica de negócios e otimização de desempenho em aplicações web."
-  },
-  {
-    company: "UFRN",
-    period: "2024 - Até o momento",
-    role: "Bacharelado em Sistemas de Informação",
-    description: "Início da faculdade de Sistemas de Informação."
-  }
-];
+import { motion, useScroll, useSpring } from "framer-motion";
+import { GraduationCap } from "lucide-react";
+import { useRef } from "react";
+import SectionHeading from "@/components/SectionHeading";
+import { education, experiences } from "@/data/portfolio";
+import { cardReveal, viewportOnce } from "@/lib/motion";
 
 const Experience = () => {
-  return (
-    <section className="relative py-12 sm:py-16 md:py-24 px-4 sm:px-6 bg-secondary/30">
-      <div className="absolute inset-0 opacity-20 gradient-walk" style={{ background: "var(--gradient-hero)" }} />
-      <div className="container mx-auto relative z-10">
-        <motion.div className="text-center mb-10 sm:mb-12 md:mb-16" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-          <motion.h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4" variants={fadeInUp}>
-            Experiência <span className="gradient-text">Profissional</span>
-          </motion.h2>
-          <motion.p className="text-muted-foreground text-sm sm:text-base md:text-lg max-w-2xl mx-auto px-4" variants={fadeInUp}>
-            Trajetória profissional e principais conquistas
-          </motion.p>
-        </motion.div>
+  const listRef = useRef<HTMLOListElement>(null);
+  const { scrollYProgress } = useScroll({ target: listRef, offset: ["start 75%", "end 60%"] });
+  const lineScale = useSpring(scrollYProgress, { stiffness: 90, damping: 25 });
 
-        <div className="max-w-4xl mx-auto space-y-4 sm:space-y-6">
-          {experiences.map((exp, index) => (
-            <motion.div key={index} variants={cardReveal} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-            <Card 
-              className="p-4 sm:p-6 md:p-8 hover-glow transition-all border-border/50 bg-card/50 backdrop-blur"
-            >
-              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
-                <div className="flex-shrink-0">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary/20 flex items-center justify-center">
-                    <Briefcase className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
-                  </div>
-                </div>
-                
-                <div className="flex-1">
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-2 gap-1 sm:gap-2">
-                    <h3 className="text-xl sm:text-2xl font-bold">{exp.role}</h3>
-                    <span className="text-primary font-medium text-sm sm:text-base">{exp.period}</span>
-                  </div>
-                  
-                  <p className="text-muted-foreground font-medium mb-2 sm:mb-3 text-sm sm:text-base">{exp.company}</p>
-                  <p className="text-foreground/80 leading-relaxed text-xs sm:text-sm md:text-base">{exp.description}</p>
-                </div>
-              </div>
-            </Card>
-            </motion.div>
-          ))}
+  return (
+    <section id="experiencia" className="border-t border-border/60 py-24 sm:py-32">
+      <div className="container mx-auto grid gap-16 lg:grid-cols-[1fr_1.6fr]">
+        <div className="lg:sticky lg:top-28 lg:self-start">
+          <SectionHeading
+            eyebrow="Trajetória"
+            title={<>Experiência <em className="font-serif font-normal">profissional</em></>}
+            description="Da análise de dados ao desenvolvimento de sistemas completos — cada etapa somou uma camada ao que entrego hoje."
+          />
+
+          <motion.div
+            variants={cardReveal}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+            className="surface mt-10 flex gap-4 p-5"
+          >
+            <div className="grid h-10 w-10 flex-shrink-0 place-items-center rounded-xl border border-border bg-secondary">
+              <GraduationCap className="h-5 w-5 text-primary" />
+            </div>
+            <div>
+              <p className="font-mono text-[11px] text-muted-foreground">{education.period}</p>
+              <p className="mt-1 font-medium">{education.course}</p>
+              <p className="text-sm text-muted-foreground">{education.institution}</p>
+            </div>
+          </motion.div>
         </div>
+
+        <ol ref={listRef} className="relative">
+          <div className="absolute left-[7px] top-2 bottom-2 w-px bg-border" aria-hidden />
+          <motion.div
+            className="absolute left-[7px] top-2 bottom-2 w-px origin-top bg-gradient-to-b from-primary to-accent"
+            style={{ scaleY: lineScale }}
+            aria-hidden
+          />
+
+          {experiences.map((exp) => (
+            <motion.li
+              key={exp.company + exp.role}
+              variants={cardReveal}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+              className="relative pb-14 pl-10 last:pb-0"
+            >
+              <span className="absolute left-0 top-1.5 grid h-[15px] w-[15px] place-items-center rounded-full border border-border bg-background">
+                <span className={`h-[7px] w-[7px] rounded-full ${exp.current ? "bg-primary" : "bg-muted-foreground/40"}`} />
+              </span>
+
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                <p className="font-mono text-xs text-muted-foreground">{exp.period}</p>
+                {exp.current && (
+                  <span className="rounded-full border border-primary/30 bg-primary/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-primary">
+                    Atual
+                  </span>
+                )}
+              </div>
+              <h3 className="mt-2 text-xl sm:text-2xl">{exp.role}</h3>
+              <p className="mt-1 text-sm text-foreground/70">{exp.company}</p>
+              <p className="mt-4 max-w-2xl leading-relaxed text-muted-foreground">{exp.description}</p>
+              <div className="mt-4 flex flex-wrap gap-1.5">
+                {exp.tags.map((t) => (
+                  <span key={t} className="chip">{t}</span>
+                ))}
+              </div>
+            </motion.li>
+          ))}
+        </ol>
       </div>
     </section>
   );
