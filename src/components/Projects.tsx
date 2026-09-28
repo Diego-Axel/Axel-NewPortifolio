@@ -57,21 +57,25 @@ const DashboardArt = () => {
   );
 };
 
-const ProjectLink = ({ project }: { project: Project }) =>
-  project.demo ? (
-    <a
-      href={project.demo}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground transition-colors hover:text-primary"
-    >
-      Ver projeto ao vivo <ArrowUpRight className="h-4 w-4" />
-    </a>
-  ) : project.confidential ? (
-    <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
-      <Lock className="h-3.5 w-3.5" /> Projeto de cliente · código privado
-    </span>
-  ) : null;
+const ProjectLink = ({ project }: { project: Project }) => (
+  <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+    {project.demo && (
+      <a
+        href={project.demo}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground transition-colors hover:text-primary"
+      >
+        {project.demoLabel ?? "Ver projeto ao vivo"} <ArrowUpRight className="h-4 w-4" />
+      </a>
+    )}
+    {project.confidential && (
+      <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
+        <Lock className="h-3.5 w-3.5" /> Projeto de cliente · código privado
+      </span>
+    )}
+  </div>
+);
 
 /* Card surface with a spotlight that tracks the cursor */
 const SpotlightCard = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => {

@@ -9,6 +9,8 @@ export type Project = {
   image?: string;
   tech: string[];
   demo?: string;
+  /** Link text when the default "Ver projeto ao vivo" doesn't fit. */
+  demoLabel?: string;
   status?: string;
   /** Private/client repositories are shown without a code link. */
   confidential?: boolean;
@@ -32,6 +34,8 @@ export const featuredProjects: Project[] = [
     ],
     role: "Arquitetura e desenvolvimento full stack — do modelo de dados ao deploy.",
     image: "/images/phe-sistema.jpg",
+    demo: "https://phe-system.vercel.app/login",
+    demoLabel: "Acessar o sistema",
     tech: ["React 19", "TypeScript", "Tailwind", "Node.js", "Express 5", "Prisma", "PostgreSQL", "Vitest", "Fly.io"],
     confidential: true,
   },
@@ -50,6 +54,7 @@ export const featuredProjects: Project[] = [
     ],
     role: "Design de produto, desenvolvimento e publicação.",
     image: "/images/fernando-mariz.jpg",
+    demo: "https://fernandomariz.adv.br/",
     tech: ["Next.js 16", "React 19", "TypeScript", "Tailwind v4", "Prisma", "PostgreSQL", "Vercel"],
     confidential: true,
   },
