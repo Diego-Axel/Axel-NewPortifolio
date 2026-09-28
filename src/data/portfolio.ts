@@ -67,7 +67,13 @@ export const projects: Project[] = [
     category: "Dashboard de BI · Setor sucroenergético",
     year: "2026",
     summary:
-      "Dashboard de produção para usina: importa planilhas quinzenais, organiza os dados em modelo dimensional e acompanha cana processada, açúcar e etanol por safra e unidade.",
+      "Dashboard de produção para usina: importa os relatórios quinzenais, organiza os dados em modelo dimensional e acompanha cana processada, açúcar e etanol por safra e unidade.",
+    highlights: [
+      "Upload de relatórios em PDF com extração automática dos dados via Supabase Edge Functions",
+      "Modelagem dimensional com tabelas de fato e dimensões (safra, período e unidade produtora)",
+      "Indicadores acumulados de cana, açúcar e etanol com gráficos de evolução por período",
+    ],
+    role: "Modelagem de dados, back-end serverless e dashboard.",
     tech: ["React", "TypeScript", "Supabase", "PostgreSQL", "Recharts"],
     confidential: true,
   },
@@ -78,6 +84,12 @@ export const projects: Project[] = [
     year: "2025",
     summary:
       "Catálogo com carrinho de compras em que o pedido chega pronto no WhatsApp da loja, eliminando atendimento manual item a item.",
+    highlights: [
+      "Catálogo de produtos com escolha de sabores e variações",
+      "Carrinho com barra flutuante e resumo do pedido",
+      "Checkout com dados de entrega que gera a mensagem do pedido formatada para o WhatsApp",
+    ],
+    role: "Desenvolvimento do front-end e do fluxo de pedidos.",
     image: "/images/venus-suplementos.jpg",
     tech: ["React", "TypeScript", "Tailwind", "shadcn/ui"],
     demo: "https://venus-suplementos.vercel.app/",
@@ -89,6 +101,12 @@ export const projects: Project[] = [
     year: "2026",
     summary:
       "Presença digital de uma empresa de engenharia que transforma bioeconomia em infraestrutura industrial.",
+    highlights: [
+      "Comunicação institucional das frentes de P&D, bioprocessos e escala industrial",
+      "Chamadas para contato comercial e apresentação das áreas de atuação",
+      "Site multilíngue em cinco idiomas: português, inglês, alemão, espanhol e chinês",
+    ],
+    role: "Desenvolvimento e publicação do site.",
     image: "/images/nutritiva.jpg",
     tech: ["React", "TypeScript", "Tailwind", "shadcn/ui"],
     demo: "https://anutritiva.com.br/",
@@ -100,6 +118,12 @@ export const projects: Project[] = [
     year: "2025",
     summary:
       "Página de captação para nutricionista com serviços, processo de atendimento, planos e dúvidas frequentes.",
+    highlights: [
+      "Seções de serviços, como funciona o atendimento e o que está incluso",
+      "Perguntas frequentes para reduzir dúvidas antes do contato",
+      "Layout responsivo com apresentação da profissional e do registro no CRN",
+    ],
+    role: "Desenvolvimento e publicação da página.",
     image: "/images/francinele-nutricionista.jpg",
     tech: ["React", "TypeScript", "Tailwind"],
     demo: "https://francinele-nutricionista.vercel.app/",
@@ -111,6 +135,12 @@ export const projects: Project[] = [
     year: "2025",
     summary:
       "Landing page de um aplicativo de saúde com assistente de IA, com foco em apresentação de funcionalidades e conversão.",
+    highlights: [
+      "Apresentação do app que monta treinos e dietas com ajuda de inteligência artificial",
+      "Estrutura de conversão com chamada principal para iniciar a jornada no app",
+      "Visual escuro alinhado à identidade do produto",
+    ],
+    role: "Desenvolvimento da landing page.",
     image: "/images/netfit-ai.jpg",
     tech: ["React", "Vite", "TypeScript", "Tailwind"],
     demo: "https://netfit-ia.vercel.app/",
