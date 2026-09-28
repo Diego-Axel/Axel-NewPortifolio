@@ -1,264 +1,216 @@
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { ExternalLink, Github } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
-import { fadeInUp, staggerContainer, cardReveal } from "@/lib/motion";
-import TiltCard from "@/components/ui/TiltCard";
+import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
+import { ArrowUpRight, Check, Lock } from "lucide-react";
+import SectionHeading from "@/components/SectionHeading";
+import { featuredProjects, projects, type Project } from "@/data/portfolio";
+import { cardReveal, staggerContainer, viewportOnce } from "@/lib/motion";
 
-const projects = [
-	{
-		title: "Landing Page Para Uma Barbearia",
-		description:
-			"Landing page responsiva para uma barbearia, com agendamento online e galeria de fotos.",
-		image: "/images/landingBarbearia.png",
-		tech: ["React", "TypeScript", "Tailwind CSS", "Node.js"],
-		github: "https://github.com/Diego-Axel",
-		demo: "#",
-	},
-	{
-		title: "One Page para uma nutricionista",
-		description:
-			"One page responsiva para uma nutricionista, destacando serviços, informações de contato, como funciona, o que está incluso e dúvidas.",
-		image: "/images/onepageNutricao.png",
-		tech: ["React", "TypeScript", "Tailwind CSS", "Node.js"],
-		github: "https://github.com/Diego-Axel",
-		demo: "https://francinele-nutricionista.vercel.app/",
-	},
-	{
-		title: "Lista de Supermercado Personalizada",
-		description:
-			"Aplicativo para criação de listas de compras personalizadas com compartilhamento em tempo real, feita de acordo como o cliente pediu e adequada para a realidade dele.",
-		image: "/images/listaDeSupermercado.png",
-		tech: ["React", "TypeScript", "Tailwind CSS", "PLpgSQL", "Node.js"],
-		github: "https://github.com/Diego-Axel",
-		demo: "#",
-	},
-	{
-		title: "Página Web para o incentivo à sáude",
-		description:
-			"Uma página Web destinada a dicas de treino, corrida e alimentação em prol de uma vida mais saudável e ativa.",
-		image: "/images/fitnesWeb.png",
-		tech: ["HTML5", "CSS3", "JavaScript"],
-		github: "https://github.com/Diego-Axel",
-		demo: "https://diego-axel.github.io/FitnesWeb/",
-	},
-	{
-		title: "Landing Page para um aplicativo de AutoSaúde",
-		description:
-			"Uma Landing Page para um aplicativo focado em AutoSaúde, oferecendo recursos e informações para promover o bem-estar e a saúde pessoal, tudo isso com uma IA para te ajudar",
-		image: "/images/netfitai.png",
-		tech: ["React", "Vite", "TypeScript", "Tailwind CSS", "Shadcn UI"],
-		github: "https://github.com/Diego-Axel",
-		demo: "https://netfit-ia.vercel.app/",
-	},
-	{
-		title: "Sistema de Pedidos Online Para Loja de Suplementos",
-		description:
-			"Sistema de pedidos online para uma loja de suplementos, com carrinho de compras, onde os pedidos são enviados diretamente para o WhatsApp da loja.",
-		image: "/images/venus-suplementos.png",
-		tech: ["React", "Vite", "TypeScript", "Tailwind CSS", "Shadcn UI"],
-		github: "https://github.com/Diego-Axel",
-		demo: "https://venus-suplementos.vercel.app/",
-	},
-	{
-		title: "Landing Page para a Nutritiva",
-		description:
-			"Uma Landing Page para a Nutritiva, uma empresa de Engenharia aplicada para transformar bioeconomia em infraestrutura industrial.",
-		image: "/images/nutritiva1.png",
-		tech: ["React", "Vite", "TypeScript", "Tailwind CSS", "Shadcn UI"],
-		github: "https://github.com/Diego-Axel",
-		demo: "#",
-	},
-	{
-		title: "+ Uma Landing Page para a Nutritiva",
-		description:
-			"Uma Landing Page para a Nutritiva, uma empresa de Engenharia aplicada para transformar bioeconomia em infraestrutura industrial.",
-		image: "/images/nutritiva2.png",
-		tech: ["React", "Vite", "TypeScript", "Tailwind CSS", "Shadcn UI"],
-		github: "https://github.com/Diego-Axel",
-		demo: "https://anutritiva.com.br/",
-	},
-];
+/* Browser-window frame around a project screenshot */
+const BrowserFrame = ({ project }: { project: Project }) => (
+  <div className="overflow-hidden rounded-xl border border-border bg-secondary/60">
+    <div className="flex items-center gap-1.5 border-b border-border px-3 py-2.5">
+      <span className="h-2.5 w-2.5 rounded-full bg-muted" />
+      <span className="h-2.5 w-2.5 rounded-full bg-muted" />
+      <span className="h-2.5 w-2.5 rounded-full bg-muted" />
+      <span className="ml-3 truncate font-mono text-[10px] text-muted-foreground">
+        {project.demo ? project.demo.replace(/^https?:\/\//, "").replace(/\/$/, "") : project.category}
+      </span>
+    </div>
+    <div className="relative aspect-[16/10] overflow-hidden">
+      {project.image ? (
+        <img
+          src={project.image}
+          alt={`Captura de tela do projeto ${project.title}`}
+          loading="lazy"
+          decoding="async"
+          className="h-full w-full object-cover object-top transition-transform duration-[1.2s] ease-out group-hover:scale-[1.04]"
+        />
+      ) : (
+        <DashboardArt />
+      )}
+    </div>
+  </div>
+);
 
-const Projects = () => {
-	const scrollRef = useRef<HTMLDivElement>(null);
-	const [isPaused, setIsPaused] = useState(false);
-	const scrollPosRef = useRef(0);
-
-	// Drag state
-	const isDragging = useRef(false);
-	const startX = useRef(0);
-	const scrollLeft = useRef(0);
-
-	useEffect(() => {
-		const scrollContainer = scrollRef.current;
-		if (!scrollContainer || isPaused) return;
-
-		const scrollSpeed = 1;
-
-		const scroll = () => {
-			scrollPosRef.current += scrollSpeed;
-			if (scrollPosRef.current >= scrollContainer.scrollWidth / 2) {
-				scrollPosRef.current = 0;
-			}
-			scrollContainer.scrollLeft = scrollPosRef.current;
-		};
-
-		const interval = setInterval(scroll, 30);
-
-		return () => clearInterval(interval);
-	}, [isPaused]);
-
-	// Mouse events para drag horizontal
-	const handleMouseDown = (e: React.MouseEvent) => {
-		const container = scrollRef.current;
-		if (!container) return;
-		isDragging.current = true;
-		setIsPaused(true);
-		startX.current = e.pageX - container.offsetLeft;
-		scrollLeft.current = container.scrollLeft;
-	};
-
-	const handleMouseMove = (e: React.MouseEvent) => {
-		const container = scrollRef.current;
-		if (!container || !isDragging.current) return;
-		e.preventDefault();
-		const x = e.pageX - container.offsetLeft;
-		const walk = (x - startX.current);
-		container.scrollLeft = scrollLeft.current - walk;
-		scrollPosRef.current = container.scrollLeft;
-	};
-
-	const handleMouseUp = () => {
-		isDragging.current = false;
-		setIsPaused(false);
-	};
-
-	// Touch events para drag horizontal mobile
-	const handleTouchStart = (e: React.TouchEvent) => {
-		const container = scrollRef.current;
-		if (!container) return;
-		isDragging.current = true;
-		setIsPaused(true);
-		startX.current = e.touches[0].pageX - container.offsetLeft;
-		scrollLeft.current = container.scrollLeft;
-	};
-
-	const handleTouchMove = (e: React.TouchEvent) => {
-		const container = scrollRef.current;
-		if (!container || !isDragging.current) return;
-		const x = e.touches[0].pageX - container.offsetLeft;
-		const walk = (x - startX.current);
-		container.scrollLeft = scrollLeft.current - walk;
-		scrollPosRef.current = container.scrollLeft;
-	};
-
-	const handleTouchEnd = () => {
-		isDragging.current = false;
-		setIsPaused(false);
-	};
-
-	return (
-		<section id="projects" className="relative py-12 sm:py-16 md:py-24 px-0 sm:px-6 overflow-hidden">
-			<div className="absolute inset-0 opacity-25 gradient-walk" style={{ background: "var(--gradient-hero)" }} />
-			<div className="container mx-auto relative z-10">
-				<motion.div className="text-center mb-10 sm:mb-12 md:mb-16 px-4" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-					<motion.h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4" variants={fadeInUp}>
-						Projetos em{" "}
-						<span className="gradient-text">Destaque</span>
-					</motion.h2>
-					<motion.p className="text-muted-foreground text-sm sm:text-base md:text-lg max-w-2xl mx-auto" variants={fadeInUp}>
-						Alguns dos meus trabalhos mais recentes e impactantes
-					</motion.p>
-				</motion.div>
-
-				<div
-					ref={scrollRef}
-					className="flex gap-4 sm:gap-6 overflow-x-hidden pb-4 cursor-grab pl-4 sm:pl-0"
-					onMouseEnter={() => setIsPaused(true)}
-					onMouseLeave={() => { setIsPaused(false); handleMouseUp(); }}
-					onMouseDown={handleMouseDown}
-					onMouseMove={handleMouseMove}
-					onMouseUp={handleMouseUp}
-					onTouchStart={handleTouchStart}
-					onTouchMove={handleTouchMove}
-					onTouchEnd={handleTouchEnd}
-				>
-					{[...projects, ...projects].map((project, index) => (
-						<motion.div key={index} variants={cardReveal} initial="hidden" animate="visible">
-							<TiltCard className="flex-shrink-0 w-[280px] sm:w-[340px] md:w-[400px]">
-								<Card
-									className="h-full w-full overflow-hidden hover-glow transition-all border-border/50 bg-card/50 backdrop-blur"
-								>
-									<div className="relative h-40 sm:h-44 md:h-48 overflow-hidden">
-										<img
-											src={project.image}
-											alt={project.title}
-											loading="lazy"
-											decoding="async"
-											className="w-full h-full object-cover transition-transform hover:scale-110"
-										/>
-										<div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
-									</div>
-
-									<div className="p-4 sm:p-5 md:p-6 space-y-3 sm:space-y-4">
-										<h3 className="text-lg sm:text-xl md:text-2xl font-bold line-clamp-2">{project.title}</h3>
-										<p className="text-muted-foreground text-xs sm:text-sm line-clamp-3">
-											{project.description}
-										</p>
-
-										<div className="flex flex-wrap gap-1.5 sm:gap-2">
-											{project.tech.map((tech) => (
-												<span
-													key={tech}
-													className="px-2 sm:px-3 py-0.5 sm:py-1 text-[10px] sm:text-xs font-medium rounded-full bg-primary/20 text-primary"
-												>
-													{tech}
-												</span>
-											))}
-										</div>
-
-										<div className="flex gap-2 sm:gap-3 pt-2">
-											<Button
-												size="sm"
-												variant="outline"
-												className="flex-1 text-xs sm:text-sm"
-												asChild
-											>
-												<a
-													href={project.github}
-													target="_blank"
-													rel="noopener noreferrer"
-												>
-													<Github className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
-													Código
-												</a>
-											</Button>
-											<Button
-												size="sm"
-												className="flex-1 text-xs sm:text-sm"
-												asChild
-											>
-												<a
-													href={project.demo}
-													target="_blank"
-													rel="noopener noreferrer"
-												>
-													<ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
-													Demo
-												</a>
-											</Button>
-										</div>
-									</div>
-								</Card>
-							</TiltCard>
-						</motion.div>
-					))}
-				</div>
-			</div>
-		</section>
-	);
+/* Illustrative chart for projects whose real screens hold client data */
+const DashboardArt = () => {
+  const bars = [38, 52, 44, 61, 58, 72, 66, 80, 76, 88, 84, 94];
+  return (
+    <div className="flex h-full w-full flex-col gap-3 bg-gradient-to-br from-card to-secondary p-5">
+      <div className="grid grid-cols-3 gap-3">
+        {["Cana processada", "Açúcar", "Etanol"].map((k, i) => (
+          <div key={k} className="rounded-lg border border-border bg-background/40 p-2.5">
+            <p className="truncate font-mono text-[9px] uppercase tracking-wider text-muted-foreground">{k}</p>
+            <div className="mt-2 h-2 rounded bg-foreground/80" style={{ width: `${70 - i * 12}%` }} />
+          </div>
+        ))}
+      </div>
+      <div className="flex flex-1 items-end gap-1.5 rounded-lg border border-border bg-background/40 p-3">
+        {bars.map((h, i) => (
+          <div
+            key={i}
+            className="flex-1 rounded-sm bg-gradient-to-t from-primary/30 to-primary transition-all duration-700 group-hover:opacity-100"
+            style={{ height: `${h}%`, opacity: 0.55 + i * 0.03 }}
+          />
+        ))}
+      </div>
+    </div>
+  );
 };
+
+const ProjectLink = ({ project }: { project: Project }) => (
+  <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+    {project.demo && (
+      <a
+        href={project.demo}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground transition-colors hover:text-primary"
+      >
+        {project.demoLabel ?? "Ver projeto ao vivo"} <ArrowUpRight className="h-4 w-4" />
+      </a>
+    )}
+    {project.confidential && (
+      <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
+        <Lock className="h-3.5 w-3.5" /> Projeto de cliente · código privado
+      </span>
+    )}
+  </div>
+);
+
+/* Card surface with a spotlight that tracks the cursor */
+const SpotlightCard = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => {
+  const x = useMotionValue(-400);
+  const y = useMotionValue(-400);
+  const background = useMotionTemplate`radial-gradient(420px circle at ${x}px ${y}px, hsl(var(--primary) / 0.08), transparent 70%)`;
+
+  return (
+    <motion.article
+      variants={cardReveal}
+      onMouseMove={(e) => {
+        const r = e.currentTarget.getBoundingClientRect();
+        x.set(e.clientX - r.left);
+        y.set(e.clientY - r.top);
+      }}
+      onMouseLeave={() => {
+        x.set(-400);
+        y.set(-400);
+      }}
+      className={`surface group relative overflow-hidden transition-colors duration-500 hover:border-foreground/15 ${className}`}
+    >
+      <motion.div aria-hidden className="pointer-events-none absolute inset-0" style={{ background }} />
+      <div className="relative">{children}</div>
+    </motion.article>
+  );
+};
+
+const FeaturedProject = ({ project, index }: { project: Project; index: number }) => (
+  <SpotlightCard className="p-5 sm:p-8 lg:p-10">
+    <div className={`grid items-center gap-8 lg:grid-cols-2 lg:gap-12 ${index % 2 ? "lg:[&>*:first-child]:order-2" : ""}`}>
+      <BrowserFrame project={project} />
+
+      <div>
+        <div className="flex flex-wrap items-center gap-3">
+          <span className="font-mono text-xs text-muted-foreground">0{index + 1}</span>
+          <span className="h-px w-8 bg-border" />
+          <span className="font-mono text-xs text-muted-foreground">{project.category}</span>
+          {project.status && (
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-[11px] text-emerald-300">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+              {project.status}
+            </span>
+          )}
+        </div>
+
+        <h3 className="mt-4 text-3xl sm:text-4xl">{project.title}</h3>
+        <p className="mt-4 leading-relaxed text-muted-foreground">{project.summary}</p>
+
+        {project.highlights && (
+          <ul className="mt-6 space-y-2.5">
+            {project.highlights.map((h) => (
+              <li key={h} className="flex gap-3 text-sm text-foreground/85">
+                <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+                {h}
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {project.role && (
+          <p className="mt-6 border-l-2 border-primary/60 pl-4 text-sm text-muted-foreground">
+            <span className="text-foreground">Meu papel:</span> {project.role}
+          </p>
+        )}
+
+        <div className="mt-6 flex flex-wrap gap-1.5">
+          {project.tech.map((t) => (
+            <span key={t} className="chip">{t}</span>
+          ))}
+        </div>
+
+        <div className="mt-8">
+          <ProjectLink project={project} />
+        </div>
+      </div>
+    </div>
+  </SpotlightCard>
+);
+
+const ProjectCard = ({ project }: { project: Project }) => (
+  <SpotlightCard className="flex h-full flex-col p-4 sm:p-5">
+    <BrowserFrame project={project} />
+    <div className="flex flex-1 flex-col px-1 pt-5">
+      <div className="flex items-center justify-between gap-3">
+        <p className="font-mono text-[11px] text-muted-foreground">{project.category}</p>
+        <p className="font-mono text-[11px] text-muted-foreground">{project.year}</p>
+      </div>
+      <h3 className="mt-2 text-xl">{project.title}</h3>
+      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{project.summary}</p>
+      <div className="mt-4 flex flex-wrap gap-1.5">
+        {project.tech.map((t) => (
+          <span key={t} className="chip">{t}</span>
+        ))}
+      </div>
+      <div className="mt-auto pt-6">
+        <ProjectLink project={project} />
+      </div>
+    </div>
+  </SpotlightCard>
+);
+
+const Projects = () => (
+  <section id="projetos" className="py-24 sm:py-32">
+    <div className="container mx-auto">
+      <SectionHeading
+        eyebrow="Projetos selecionados"
+        title={<>Trabalhos com <em className="font-serif font-normal">impacto real</em></>}
+        description="Sistemas e sites em uso por instituições, empresas e profissionais — escolhidos pelo problema que resolvem, não só pela aparência."
+      />
+
+      <motion.div
+        className="mt-16 space-y-6"
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+      >
+        {featuredProjects.map((p, i) => (
+          <FeaturedProject key={p.slug} project={p} index={i} />
+        ))}
+      </motion.div>
+
+      <motion.div
+        className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+      >
+        {projects.map((p) => (
+          <ProjectCard key={p.slug} project={p} />
+        ))}
+      </motion.div>
+    </div>
+  </section>
+);
 
 export default Projects;

@@ -1,58 +1,21 @@
-import { Github, Linkedin, Mail } from "lucide-react";
+import { ArrowUp } from "lucide-react";
+import { socials } from "@/data/portfolio";
 
-const Footer = () => {
-  const socialLinks = [
-    {
-      icon: Github,
-      href: "https://github.com/Diego-Axel",
-      label: "GitHub"
-    },
-    {
-      icon: Linkedin,
-      href: "https://www.linkedin.com/in/di%C3%AAgo-axel-1684452b5/",
-      label: "LinkedIn"
-    },
-    // {
-    //   icon: Mail,
-    //   href: "mailto:contato@email.com",
-    //   label: "E-mail"
-    // }
-  ];
-
-  return (
-    <footer className="py-8 sm:py-10 md:py-12 px-4 sm:px-6 border-t border-border/50">
-      <div className="container mx-auto">
-        <div className="flex flex-col items-center gap-4 sm:gap-6">
-          <div className="flex gap-4 sm:gap-6">
-            {socialLinks.map((link) => {
-              const Icon = link.icon;
-              return (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-secondary flex items-center justify-center hover-glow transition-all hover:scale-110 hover:bg-primary group"
-                  aria-label={link.label}
-                >
-                  <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-foreground group-hover:text-primary-foreground transition-colors" />
-                </a>
-              );
-            })}
-          </div>
-
-          <div className="text-center space-y-1 sm:space-y-2">
-            <p className="text-muted-foreground text-xs sm:text-sm md:text-base">
-              © {new Date().getFullYear()} Diêgo Axel. Todos os direitos reservados.
-            </p>
-            <p className="text-[10px] sm:text-xs md:text-sm text-muted-foreground/70">
-              Desenvolvido com React, TypeScript, 5 xícaras de café e  muita paixão por código.
-            </p>
-          </div>
-        </div>
+const Footer = () => (
+  <footer className="border-t border-border/60">
+    <div className="container mx-auto flex flex-col items-center justify-between gap-6 py-10 sm:flex-row">
+      <p className="text-sm text-muted-foreground">
+        © {new Date().getFullYear()} Diêgo Axel · Desenvolvedor Full Stack
+      </p>
+      <div className="flex items-center gap-6 text-sm text-muted-foreground">
+        <a href={socials.github} target="_blank" rel="noopener noreferrer" className="link-underline hover:text-foreground">GitHub</a>
+        <a href={socials.linkedin} target="_blank" rel="noopener noreferrer" className="link-underline hover:text-foreground">LinkedIn</a>
+        <a href="#top" className="grid h-9 w-9 place-items-center rounded-full border border-border transition-colors hover:border-foreground/40 hover:text-foreground" aria-label="Voltar ao topo">
+          <ArrowUp className="h-4 w-4" />
+        </a>
       </div>
-    </footer>
-  );
-};
+    </div>
+  </footer>
+);
 
 export default Footer;

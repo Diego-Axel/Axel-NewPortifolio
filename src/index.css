@@ -2,119 +2,51 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
-/* Typed custom properties so hue animations interpolate smoothly */
-@property --primary-hue {
-  syntax: '<number>';
-  inherits: true;
-  initial-value: 205;
-}
-@property --accent-hue {
-  syntax: '<number>';
-  inherits: true;
-  initial-value: 350;
-}
+/* Design system. All colors are HSL and consumed through Tailwind tokens. */
 
 @layer base {
   :root {
-    /* Palette inspired by photo lighting: deep navy + cyan/blue and red/magenta */
-    --primary-hue: 205;
-    --accent-hue: 350;
-    --background: 220 35% 7%;
-    --foreground: 0 0% 100%;
+    /* Neutral graphite base with a single, restrained blue accent */
+    --background: 240 10% 4%;
+    --foreground: 240 5% 96%;
 
-    --card: 220 35% 12%;
-    --card-foreground: 0 0% 100%;
+    --card: 240 8% 7%;
+    --card-foreground: 240 5% 96%;
 
-    --popover: 220 35% 12%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 240 8% 7%;
+    --popover-foreground: 240 5% 96%;
 
-    /* Primary = cyan/blue glow, Accent = red/magenta glow */
-    --primary: var(--primary-hue) 90% 60%;
-    --primary-foreground: 220 35% 7%;
+    --primary: 214 100% 64%;
+    --primary-foreground: 240 10% 4%;
 
-    --secondary: 220 25% 16%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 240 6% 11%;
+    --secondary-foreground: 240 5% 96%;
 
-    --muted: 220 20% 28%;
-    --muted-foreground: 220 10% 68%;
+    --muted: 240 6% 14%;
+    --muted-foreground: 240 5% 62%;
 
-    --accent: var(--accent-hue) 85% 60%;
-    --accent-foreground: 220 35% 7%;
+    --accent: 190 90% 55%;
+    --accent-foreground: 240 10% 4%;
 
-    --destructive: 0 74% 48%;
+    --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 25% 18%;
-    --input: 220 25% 18%;
-    --ring: var(--primary-hue) 90% 60%;
+    --border: 240 6% 14%;
+    --input: 240 6% 16%;
+    --ring: 214 100% 64%;
 
-    --radius: 0.75rem;
+    --radius: 0.875rem;
 
-    --sidebar-background: 220 32% 10%;
-    --sidebar-foreground: 0 0% 100%;
-    --sidebar-primary: 205 90% 60%;
-    --sidebar-primary-foreground: 220 35% 7%;
-    --sidebar-accent: 220 25% 16%;
-    --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 220 25% 18%;
-    --sidebar-ring: 205 90% 60%;
+    --sidebar-background: 240 8% 7%;
+    --sidebar-foreground: 240 5% 96%;
+    --sidebar-primary: 214 100% 64%;
+    --sidebar-primary-foreground: 240 10% 4%;
+    --sidebar-accent: 240 6% 11%;
+    --sidebar-accent-foreground: 240 5% 96%;
+    --sidebar-border: 240 6% 14%;
+    --sidebar-ring: 214 100% 64%;
 
-    /* Custom gradient for hero section */
-    --gradient-hero: radial-gradient(1200px circle at 20% 20%, hsl(var(--primary-hue) 90% 18% / 0.55) 0%, transparent 45%),
-         radial-gradient(1200px circle at 80% 30%, hsl(var(--accent-hue) 85% 20% / 0.45) 0%, transparent 50%),
-             linear-gradient(135deg, hsl(220 35% 7%) 0%, hsl(220 30% 10%) 100%);
-    
-    /* Shadows */
-    --shadow-card: 0 10px 30px -10px hsl(220 30% 5% / 0.55);
-    --shadow-glow: 0 0 40px hsl(var(--accent) / 0.18), 0 0 24px hsl(var(--primary) / 0.12);
-    
-    /* Animations */
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .dark {
-    --primary-hue: 205;
-    --accent-hue: 350;
-    --background: 220 35% 7%;
-    --foreground: 0 0% 100%;
-
-    --card: 220 35% 12%;
-    --card-foreground: 0 0% 100%;
-
-    --popover: 220 35% 12%;
-    --popover-foreground: 0 0% 100%;
-
-    --primary: var(--primary-hue) 90% 60%;
-    --primary-foreground: 220 35% 7%;
-
-    --secondary: 220 25% 16%;
-    --secondary-foreground: 0 0% 100%;
-
-    --muted: 220 20% 28%;
-    --muted-foreground: 220 10% 68%;
-
-    --accent: var(--accent-hue) 85% 60%;
-    --accent-foreground: 220 35% 7%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 100%;
-
-    --border: 220 25% 18%;
-    --input: 220 25% 18%;
-    --ring: var(--primary-hue) 90% 60%;
-    
-    --sidebar-background: 220 32% 10%;
-    --sidebar-foreground: 0 0% 100%;
-    --sidebar-primary: 205 90% 60%;
-    --sidebar-primary-foreground: 220 35% 7%;
-    --sidebar-accent: 220 25% 16%;
-    --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 220 25% 18%;
-    --sidebar-ring: 205 90% 60%;
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   }
 }
 
@@ -123,70 +55,33 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
-  body {
-    @apply bg-background text-foreground;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
     -webkit-tap-highlight-color: transparent;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-bold;
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    overflow-x: hidden;
+    font-feature-settings: "ss01", "cv11";
   }
 
-  .gradient-text {
-    @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
+  ::selection {
+    background: hsl(var(--primary) / 0.3);
+    color: hsl(var(--foreground));
   }
 
-  .hover-glow {
-    transition: var(--transition-smooth);
+  h1, h2, h3, h4 {
+    @apply font-semibold tracking-tight;
   }
 
-  .hover-glow:hover {
-    box-shadow: var(--shadow-glow);
-  }
-
-  /* Animated gradient movement (walking colors) */
-  .gradient-walk {
-    background-size: 180% 180%;
-    animation: gradient-pan 28s ease-in-out infinite;
-  }
-
-  @keyframes gradient-pan {
-    0% {
-      background-position: 0% 50%, 80% 30%, 0% 0%;
-    }
-    50% {
-      background-position: 100% 50%, 20% 70%, 100% 100%;
-    }
-    100% {
-      background-position: 0% 50%, 80% 30%, 0% 0%;
+  @media (max-width: 640px) {
+    html {
+      font-size: 15px;
     }
   }
 
-  /* RGB-style hue cycling across primary/accent */
-  @keyframes primary-hue-cycle {
-    0%   { --primary-hue: 0; }
-    33%  { --primary-hue: 120; }
-    66%  { --primary-hue: 240; }
-    100% { --primary-hue: 360; }
-  }
-  @keyframes accent-hue-cycle {
-    0%   { --accent-hue: 240; }
-    33%  { --accent-hue: 360; }
-    66%  { --accent-hue: 60; }
-    100% { --accent-hue: 240; }
-  }
-  .rgb-animate {
-    animation: primary-hue-cycle 18s linear infinite, accent-hue-cycle 18s linear infinite -9s;
-  }
-
-  /* Respect user preference to reduce motion */
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
       animation-duration: 0.001ms !important;
@@ -194,88 +89,67 @@ All colors MUST be HSL.
       transition-duration: 0.001ms !important;
       scroll-behavior: auto !important;
     }
-    .hover-glow:hover {
-      box-shadow: none;
-    }
-    .rgb-animate {
-      animation: none !important;
-    }
-    .gradient-walk {
-      animation: none !important;
-    }
+  }
+}
+
+@layer components {
+  /* Small monospace eyebrow used above section titles */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground;
+  }
+  .eyebrow::before {
+    content: "";
+    @apply h-px w-6 bg-primary;
   }
 
-  /* Mobile-specific improvements */
-  @media (max-width: 640px) {
-    html {
-      font-size: 14px;
-    }
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
   }
 
-  /* Prevent horizontal scroll */
-  body {
-    overflow-x: hidden;
+  /* Hairline card surface with a soft top highlight */
+  .surface {
+    @apply rounded-2xl border border-border bg-card/60 backdrop-blur-sm;
+    box-shadow: inset 0 1px 0 0 hsl(0 0% 100% / 0.04);
   }
 
-  /* Better touch scrolling on iOS */
-  * {
-    -webkit-overflow-scrolling: touch;
+  .chip {
+    @apply inline-flex items-center rounded-full border border-border bg-secondary/60 px-2.5 py-1 font-mono text-[11px] text-muted-foreground;
+  }
+
+  .link-underline {
+    @apply relative;
+  }
+  .link-underline::after {
+    content: "";
+    @apply absolute -bottom-0.5 left-0 h-px w-full origin-right scale-x-0 bg-current transition-transform duration-300;
+  }
+  .link-underline:hover::after {
+    @apply origin-left scale-x-100;
   }
 }
 
 @layer utilities {
-  .animate-fade-in {
-    animation: fade-in 0.6s ease-out forwards;
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, hsl(var(--foreground) / 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--foreground) / 0.045) 1px, transparent 1px);
+    background-size: 64px 64px;
   }
 
-  .animate-slide-up {
-    animation: slide-up 0.6s ease-out forwards;
+  .mask-fade-y {
+    mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
   }
 
-  /* Line clamp utilities for text truncation */
-  .line-clamp-2 {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
+  .mask-fade-x {
+    mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
   }
 
-  .line-clamp-3 {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
+  .animate-marquee {
+    animation: marquee 40s linear infinite;
   }
 
-  /* Safe area insets for notched devices */
-  @supports (padding: max(0px)) {
-    .safe-top {
-      padding-top: max(env(safe-area-inset-top), 1rem);
-    }
-    .safe-bottom {
-      padding-bottom: max(env(safe-area-inset-bottom), 1rem);
-    }
-  }
-
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  @keyframes slide-up {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
   }
 }

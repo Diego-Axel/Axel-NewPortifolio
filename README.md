@@ -21,19 +21,22 @@ Este projeto foi construído com as seguintes tecnologias:
 * **Vite:** Como ferramenta de build, proporcionando um desenvolvimento rápido.
 * **Tailwind CSS:** Para a estilização da aplicação.
 * **React Router:** Para o gerenciamento de rotas.
-* **Sonner & React Toastify:** Para notificações.
+* **Framer Motion:** Para as animações de entrada, scroll e interação.
+* **shadcn/ui:** Componentes base de formulário e notificações.
 * **Lucide React:** Para os ícones.
 
-## ⚙️ sections Seções do Portfólio
+## ⚙️ Seções do Portfólio
 
-O portfólio está organizado nas seguintes seções:
+* **Hero:** apresentação, disponibilidade e links principais.
+* **Projetos:** estudos de caso em destaque (Sistema PHE e Fernando Mariz Advocacia) e demais projetos entregues.
+* **Experiência:** linha do tempo profissional e formação.
+* **Stack:** tecnologias agrupadas por área (Frontend, Backend, Dados & BI, Entrega).
+* **Contato:** formulário que abre a conversa no WhatsApp e canais diretos.
 
-* **Hero:** Uma seção de boas-vindas com uma breve apresentação.
-* **Skills:** Apresentação das minhas principais habilidades técnicas.
-* **Experience:** Detalhes sobre minha experiência profissional e acadêmica.
-* **Projects:** Uma galeria com os meus principais projetos.
-* **Contact:** Um formulário para entrar em contato diretamente comigo.
-* **Footer:** Links para minhas redes sociais e informações adicionais.
+## ✏️ Como atualizar o conteúdo
+
+Todo o conteúdo (projetos, experiências, stack e redes sociais) fica em `src/data/portfolio.ts`.
+As capturas de tela dos projetos ficam em `public/images/` e a foto do hero em `src/assets/avatar.jpg`.
 
 ## 📫 Contato
 
