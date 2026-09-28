@@ -14,7 +14,7 @@ const stats = [
 ];
 
 const marquee = [
-  "React", "Next.js", "TypeScript", "Node.js", "Express", "Prisma",
+  "React", "Next.js", "TypeScript", "Node.js", "Express", "Python", "Django", "Prisma",
   "PostgreSQL", "Supabase", "Tailwind CSS", "Power BI", "Vitest", "Docker",
 ];
 
@@ -114,7 +114,7 @@ const Hero = () => {
                     <p className="font-mono text-[11px] text-muted-foreground">Full Stack Developer</p>
                   </div>
                   <span className="inline-flex items-center gap-1 rounded-full border border-border bg-background/70 px-2.5 py-1 text-[11px] text-muted-foreground backdrop-blur">
-                    <MapPin className="h-3 w-3" /> RN, Brasil
+                    <MapPin className="h-3 w-3" /> Caicó, RN
                   </span>
                 </div>
               </div>

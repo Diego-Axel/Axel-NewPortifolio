@@ -121,6 +121,8 @@ export type Experience = {
   company: string;
   role: string;
   period: string;
+  /** Workload and work mode, e.g. "Meio período · Remoto". */
+  meta: string;
   current?: boolean;
   description: string;
   tags: string[];
@@ -128,38 +130,71 @@ export type Experience = {
 
 export const experiences: Experience[] = [
   {
-    company: "Programa Hábitos de Estudo (PHE) · UFRN",
-    role: "Desenvolvedor Full Stack",
-    period: "Mar 2026 — Atual",
+    company: "IFRN · Programa OPPEP",
+    role: "Desenvolvedor Web",
+    period: "Jun 2026 — Atual",
+    meta: "Meio período · Remoto",
     current: true,
     description:
-      "Responsável pela arquitetura e implementação do Sistema PHE, plataforma usada pela equipe da Assistência Estudantil para acompanhar trajetórias acadêmicas. Atuo junto à coordenação, design e psicologia para transformar requisitos pedagógicos em produto.",
-    tags: ["React", "Express", "Prisma", "PostgreSQL"],
+      "Desenvolvimento, manutenção e correção de bugs do site do Programa OPPEP do IFRN, com foco em código limpo e boas práticas de programação.",
+    tags: ["Python", "Django", "PostgreSQL"],
   },
   {
-    company: "Freelancer",
-    role: "Desenvolvedor Full Stack",
-    period: "2024 — Atual",
+    company: "Tribunal Regional Eleitoral do RN (TRE-RN)",
+    role: "Estagiário",
+    period: "Abr 2026 — Atual",
+    meta: "Estágio · Presencial · Caicó, RN",
     current: true,
     description:
-      "Desenvolvimento de sites e sistemas sob medida para clientes de advocacia, saúde, varejo e indústria — do levantamento de requisitos à publicação e manutenção.",
+      "Operação supervisionada dos sistemas da Justiça Eleitoral, identificação e sugestão de melhorias nos processos da Zona Eleitoral, minuta de atos administrativos, apoio às redes sociais e à organização e planejamento das Eleições 2026.",
+    tags: ["Sistemas da Justiça Eleitoral", "Processos", "Eleições 2026"],
+  },
+  {
+    company: "UFRN · Programa Hábitos de Estudo (PHE)",
+    role: "Analista de Dados e Desenvolvedor de Software",
+    period: "Mar 2026 — Atual",
+    meta: "Bolsista · Remoto",
+    current: true,
+    description:
+      "Responsável pela arquitetura e implementação do Sistema PHE, plataforma usada pela Assistência Estudantil para acompanhar trajetórias acadêmicas, e pela análise dos dados do programa. Atuo junto à coordenação, design e psicologia para transformar requisitos pedagógicos em produto.",
+    tags: ["React", "Express", "Prisma", "PostgreSQL", "Análise de dados"],
+  },
+  {
+    company: "Autônomo",
+    role: "Desenvolvedor Web Freelancer",
+    period: "Jan 2024 — Atual",
+    meta: "Freelance · Remoto",
+    current: true,
+    description:
+      "Sites, landing pages, sistemas de vitrine e plataformas sob medida para clientes de advocacia, saúde, varejo e indústria — do levantamento de requisitos à publicação e manutenção.",
     tags: ["Next.js", "React", "Node.js", "Vercel"],
   },
   {
-    company: "BarioTech",
-    role: "Desenvolvedor Back-end",
-    period: "2024 — Ago 2025",
+    company: "UFRN · Projeto Manual do Idoso Ativo",
+    role: "Engenheiro de Software",
+    period: "Out 2025 — Dez 2025",
+    meta: "Meio período · Híbrido",
     description:
-      "Desenvolvimento de APIs RESTful e integração com bancos de dados. Implementação de regras de negócio e otimização de desempenho em aplicações web.",
-    tags: ["APIs REST", "Node.js", "SQL"],
+      "Engenharia de software do aplicativo Manual do Idoso Ativo, voltado à promoção da saúde na terceira idade, incentivando idosos a praticar atividades físicas em casa ou em academias de praça.",
+    tags: ["Engenharia de software", "Aplicativo", "Saúde"],
   },
   {
-    company: "Viggo Sistemas",
-    role: "Estagiário · Dados & BI",
-    period: "Abr 2024 — Nov 2025",
+    company: "BarioTech Solutions",
+    role: "Desenvolvedor de Software",
+    period: "Nov 2024 — Ago 2025",
+    meta: "Meio período · Híbrido",
     description:
-      "Relatórios e dashboards interativos em Power BI para apoiar decisões estratégicas, tratamento de dados, suporte a chatbots integrados a redes sociais, conciliação de transações financeiras e levantamento de requisitos com clientes.",
-    tags: ["Power BI", "Análise de dados", "Requisitos"],
+      "Desenvolvimento de APIs RESTful e integração com bancos de dados. Implementação de regras de negócio e otimização de desempenho em aplicações web.",
+    tags: ["APIs REST", "Node.js", "MongoDB"],
+  },
+  {
+    company: "Viggo Sistemas · Software House",
+    role: "Estagiário",
+    period: "Abr 2024 — Nov 2025",
+    meta: "Estágio · Presencial",
+    description:
+      "Relatórios dinâmicos e análise de dados, apoio no desenvolvimento e customização de software (revisão de código, identificação e correção de erros), monitoramento de chatbots integrados a redes sociais, conciliação de transações de cartões e levantamento de requisitos em reuniões com clientes.",
+    tags: ["Análise de dados", "Python", "Requisitos"],
   },
 ];
 
@@ -178,12 +213,12 @@ export const stack = [
   {
     title: "Backend",
     description: "APIs seguras, testadas e bem modeladas.",
-    items: ["Node.js", "Express", "Prisma", "Drizzle ORM", "REST", "JWT"],
+    items: ["Node.js", "Express", "Python", "Django", "Prisma", "REST / JWT"],
   },
   {
     title: "Dados & BI",
     description: "Do modelo relacional ao dashboard de decisão.",
-    items: ["PostgreSQL", "Supabase", "Modelagem de dados", "Power BI", "Recharts"],
+    items: ["PostgreSQL", "MongoDB", "Supabase", "Modelagem de dados", "Power BI"],
   },
   {
     title: "Entrega",

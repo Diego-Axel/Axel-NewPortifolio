@@ -69,6 +69,7 @@ const Experience = () => {
               </div>
               <h3 className="mt-2 text-xl sm:text-2xl">{exp.role}</h3>
               <p className="mt-1 text-sm text-foreground/70">{exp.company}</p>
+              <p className="mt-0.5 font-mono text-[11px] text-muted-foreground">{exp.meta}</p>
               <p className="mt-4 max-w-2xl leading-relaxed text-muted-foreground">{exp.description}</p>
               <div className="mt-4 flex flex-wrap gap-1.5">
                 {exp.tags.map((t) => (
