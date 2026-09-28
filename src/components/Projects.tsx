@@ -2,7 +2,9 @@ import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 import { ArrowUpRight, Check, Lock } from "lucide-react";
 import SectionHeading from "@/components/SectionHeading";
 import { featuredProjects, projects, type Project } from "@/data/portfolio";
-import { cardReveal, staggerContainer, viewportOnce } from "@/lib/motion";
+
+const allProjects = [...featuredProjects, ...projects];
+import { cardReveal, viewportOnce } from "@/lib/motion";
 
 /* Browser-window frame around a project screenshot */
 const BrowserFrame = ({ project }: { project: Project }) => (
@@ -15,19 +17,22 @@ const BrowserFrame = ({ project }: { project: Project }) => (
         {project.demo ? project.demo.replace(/^https?:\/\//, "").replace(/\/$/, "") : project.category}
       </span>
     </div>
-    <div className="relative aspect-[16/10] overflow-hidden">
-      {project.image ? (
+    {project.image ? (
+      <div className="relative overflow-hidden">
+        {/* Screenshots keep their natural aspect ratio so nothing gets cropped */}
         <img
           src={project.image}
           alt={`Captura de tela do projeto ${project.title}`}
           loading="lazy"
           decoding="async"
-          className="h-full w-full object-cover object-top transition-transform duration-[1.2s] ease-out group-hover:scale-[1.04]"
+          className="block h-auto w-full transition-transform duration-[1.2s] ease-out group-hover:scale-[1.03]"
         />
-      ) : (
+      </div>
+    ) : (
+      <div className="relative aspect-[16/10] overflow-hidden">
         <DashboardArt />
-      )}
-    </div>
+      </div>
+    )}
   </div>
 );
 
@@ -86,6 +91,9 @@ const SpotlightCard = ({ children, className = "" }: { children: React.ReactNode
   return (
     <motion.article
       variants={cardReveal}
+      initial="hidden"
+      whileInView="visible"
+      viewport={viewportOnce}
       onMouseMove={(e) => {
         const r = e.currentTarget.getBoundingClientRect();
         x.set(e.clientX - r.left);
@@ -110,9 +118,10 @@ const FeaturedProject = ({ project, index }: { project: Project; index: number }
 
       <div>
         <div className="flex flex-wrap items-center gap-3">
-          <span className="font-mono text-xs text-muted-foreground">0{index + 1}</span>
+          <span className="font-mono text-xs text-muted-foreground">{String(index + 1).padStart(2, "0")}</span>
           <span className="h-px w-8 bg-border" />
           <span className="font-mono text-xs text-muted-foreground">{project.category}</span>
+          <span className="font-mono text-xs text-muted-foreground/60">{project.year}</span>
           {project.status && (
             <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-[11px] text-emerald-300">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
@@ -155,28 +164,6 @@ const FeaturedProject = ({ project, index }: { project: Project; index: number }
   </SpotlightCard>
 );
 
-const ProjectCard = ({ project }: { project: Project }) => (
-  <SpotlightCard className="flex h-full flex-col p-4 sm:p-5">
-    <BrowserFrame project={project} />
-    <div className="flex flex-1 flex-col px-1 pt-5">
-      <div className="flex items-center justify-between gap-3">
-        <p className="font-mono text-[11px] text-muted-foreground">{project.category}</p>
-        <p className="font-mono text-[11px] text-muted-foreground">{project.year}</p>
-      </div>
-      <h3 className="mt-2 text-xl">{project.title}</h3>
-      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{project.summary}</p>
-      <div className="mt-4 flex flex-wrap gap-1.5">
-        {project.tech.map((t) => (
-          <span key={t} className="chip">{t}</span>
-        ))}
-      </div>
-      <div className="mt-auto pt-6">
-        <ProjectLink project={project} />
-      </div>
-    </div>
-  </SpotlightCard>
-);
-
 const Projects = () => (
   <section id="projetos" className="py-24 sm:py-32">
     <div className="container mx-auto">
@@ -186,29 +173,11 @@ const Projects = () => (
         description="Sistemas e sites em uso por instituições, empresas e profissionais — escolhidos pelo problema que resolvem, não só pela aparência."
       />
 
-      <motion.div
-        className="mt-16 space-y-6"
-        variants={staggerContainer}
-        initial="hidden"
-        whileInView="visible"
-        viewport={viewportOnce}
-      >
-        {featuredProjects.map((p, i) => (
+      <div className="mt-16 space-y-6">
+        {allProjects.map((p, i) => (
           <FeaturedProject key={p.slug} project={p} index={i} />
         ))}
-      </motion.div>
-
-      <motion.div
-        className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3"
-        variants={staggerContainer}
-        initial="hidden"
-        whileInView="visible"
-        viewport={viewportOnce}
-      >
-        {projects.map((p) => (
-          <ProjectCard key={p.slug} project={p} />
-        ))}
-      </motion.div>
+      </div>
     </div>
   </section>
 );
