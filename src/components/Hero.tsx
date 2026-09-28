@@ -5,7 +5,7 @@ import avatarImage from "@/assets/avatar.jpg";
 import { fadeInUp, lineReveal, staggerContainer } from "@/lib/motion";
 import { socials } from "@/data/portfolio";
 
-const headline = ["Construo sistemas web", "que resolvem", "problemas reais."];
+const headline = ["Construo sistemas", "web que resolvem", "problemas reais."];
 
 const stats = [
   { value: "UFRN", label: "Sistema em produção" },
@@ -105,7 +105,7 @@ const Hero = () => {
                   src={avatarImage}
                   alt="Foto de Diêgo Axel"
                   fetchPriority="high"
-                  className="h-full w-full object-cover grayscale-[25%] transition duration-700 hover:scale-[1.03] hover:grayscale-0"
+                  className="h-full w-full object-cover transition duration-700 hover:scale-[1.03]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
                 <div className="absolute inset-x-4 bottom-4 flex items-end justify-between">
