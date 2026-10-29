@@ -22,10 +22,4 @@ export const cardReveal: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease } }
 };
 
-/* Text lines that slide up from behind a clipping mask */
-export const lineReveal: Variants = {
-  hidden: { y: "110%" },
-  visible: { y: "0%", transition: { duration: 1, ease } }
-};
-
 export const viewportOnce = { once: true, margin: "-80px" } as const;
