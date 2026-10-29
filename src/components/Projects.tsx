@@ -1,10 +1,15 @@
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 import { ArrowUpRight, Check, Lock } from "lucide-react";
 import SectionHeading from "@/components/SectionHeading";
+import { useRef } from "react";
 import { featuredProjects, projects, type Project } from "@/data/portfolio";
+import { gsap, motionQuery, ScrollTrigger, useGSAP } from "@/lib/gsap";
+import { cardReveal, viewportOnce } from "@/lib/motion";
 
 const allProjects = [...featuredProjects, ...projects];
-import { cardReveal, viewportOnce } from "@/lib/motion";
+
+/** Space kept above a pinned card, clearing the fixed navbar. */
+const STACK_TOP = 96;
 
 /* Browser-window frame around a project screenshot */
 const BrowserFrame = ({ project }: { project: Project }) => (
@@ -103,7 +108,7 @@ const SpotlightCard = ({ children, className = "" }: { children: React.ReactNode
         x.set(-400);
         y.set(-400);
       }}
-      className={`surface group relative overflow-hidden transition-colors duration-500 hover:border-foreground/15 ${className}`}
+      className={`surface group relative overflow-hidden transition-colors duration-500 hover:border-foreground/15 lg:bg-card ${className}`}
     >
       <motion.div aria-hidden className="pointer-events-none absolute inset-0" style={{ background }} />
       <div className="relative">{children}</div>
@@ -164,22 +169,99 @@ const FeaturedProject = ({ project, index }: { project: Project; index: number }
   </SpotlightCard>
 );
 
-const Projects = () => (
-  <section id="projetos" className="py-24 sm:py-32">
-    <div className="container mx-auto">
-      <SectionHeading
-        eyebrow="Projetos selecionados"
-        title={<>Trabalhos com <em className="font-serif font-normal">impacto real</em></>}
-        description="Sistemas e sites em uso por instituições, empresas e profissionais — escolhidos pelo problema que resolvem, não só pela aparência."
-      />
+const Projects = () => {
+  const listRef = useRef<HTMLDivElement>(null);
 
-      <div className="mt-16 space-y-6">
-        {allProjects.map((p, i) => (
-          <FeaturedProject key={p.slug} project={p} index={i} />
-        ))}
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+
+      // Desktop: each card pins near the top and the next one slides over it,
+      // while the covered card shrinks and dims into the background.
+      mm.add(motionQuery.desktop, () => {
+        const cards = gsap.utils.toArray<HTMLElement>("[data-stack=card]", listRef.current);
+        const last = cards[cards.length - 1];
+
+        cards.slice(0, -1).forEach((card, i) => {
+          // Cards taller than the viewport pin by their bottom edge so nothing gets hidden.
+          const fits = () => card.offsetHeight <= window.innerHeight - STACK_TOP - 24;
+
+          ScrollTrigger.create({
+            trigger: card,
+            start: () => (fits() ? `top top+=${STACK_TOP}` : "bottom bottom-=24"),
+            endTrigger: last,
+            end: `top top+=${STACK_TOP}`,
+            pin: true,
+            pinSpacing: false,
+            invalidateOnRefresh: true,
+          });
+
+          // Dim with an opaque shade rather than opacity, so cards underneath never show through.
+          gsap
+            .timeline({
+              scrollTrigger: {
+                trigger: cards[i + 1],
+                start: "top bottom",
+                end: `top top+=${STACK_TOP}`,
+                scrub: true,
+                invalidateOnRefresh: true,
+              },
+            })
+            .to(card.querySelector("[data-stack=inner]"), { scale: 0.92, transformOrigin: "center top", ease: "none" }, 0)
+            .to(card.querySelector("[data-stack=shade]"), { opacity: 0.7, ease: "none" }, 0);
+        });
+
+        // Once the last card takes its place, the covered cards would otherwise stick out
+        // below it (they are taller) as the stack scrolls away, so fade them out.
+        gsap.to(
+          cards.slice(0, -1).map((card) => card.querySelector("[data-stack=inner]")),
+          {
+            autoAlpha: 0,
+            duration: 0.35,
+            ease: "power1.out",
+            scrollTrigger: {
+              trigger: last,
+              start: `top top+=${STACK_TOP}`,
+              toggleActions: "play none none reverse",
+              invalidateOnRefresh: true,
+            },
+          }
+        );
+
+        // Lazy screenshots change card heights once they load: recompute positions.
+        const images = gsap.utils.toArray<HTMLImageElement>("img", listRef.current);
+        const refresh = () => ScrollTrigger.refresh();
+        images.forEach((img) => !img.complete && img.addEventListener("load", refresh, { once: true }));
+        return () => images.forEach((img) => img.removeEventListener("load", refresh));
+      });
+
+      return () => mm.revert();
+    },
+    { scope: listRef }
+  );
+
+  return (
+    <section id="projetos" className="py-24 sm:py-32">
+      <div className="container mx-auto">
+        <SectionHeading
+          eyebrow="Projetos selecionados"
+          title={<>Trabalhos com <em className="font-serif font-normal">impacto real</em></>}
+          description="Sistemas e sites em uso por instituições, empresas e profissionais — escolhidos pelo problema que resolvem, não só pela aparência."
+        />
+
+        <div ref={listRef} className="mt-16 space-y-6">
+          {allProjects.map((p, i) => (
+            <div key={p.slug} data-stack="card">
+              <div data-stack="inner" className="relative">
+                <FeaturedProject project={p} index={i} />
+                <div data-stack="shade" aria-hidden className="pointer-events-none absolute inset-0 rounded-2xl bg-background opacity-0" />
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default Projects;
